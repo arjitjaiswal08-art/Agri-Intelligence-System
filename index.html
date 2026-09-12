@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI-powered agriculture intelligence system for Indian farmers — crop disease detection, weather advice, market prices & fertilizer planning." />
+  <title>AgriAI — Smart Agriculture Intelligence System for Indian Farmers</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>" />
+</head>
+<body>
+
+<!-- Animated Background -->
+<div class="bg-gradient"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+<!-- Mobile Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+<!-- ═══════════════════════════════════ SIDEBAR ═══════════════════════════════════ -->
+<aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+  <div class="sidebar-logo">
+    <div class="logo-icon" aria-hidden="true">🌾</div>
+    <div class="logo-text-wrap">
+      <span class="logo-title">AgriAI</span>
+      <span class="logo-sub">Intelligence System</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav" role="menubar">
+    <span class="nav-section-label">Complete Journey</span>
+    <button class="nav-item" id="nav-flow" data-target="flow" role="menuitem">
+      <span class="nav-icon" aria-hidden="true">🌾</span>
+      <span class="nav-text">End-to-End Advisor</span>
+      <span class="nav-badge-pill">NEW</span>
+    </button>
+
+    <span class="nav-section-label">Overview</span>
+    <button class="nav-item active" id="nav-dashboard" data-target="dashboard" role="menuitem" aria-current="page">
+      <span class="nav-icon" aria-hidden="true">🏠</span>
+      <span class="nav-text">Dashboard</span>
+    </button>
+
+    <span class="nav-section-label">AI Tools</span>
+    <button class="nav-item" id="nav-disease" data-target="disease" role="menuitem">
+      <span class="nav-icon" aria-hidden="true">🦠</span>
+      <span class="nav-text">Disease Detector</span>
+    </button>
+    <button class="nav-item" id="nav-weather" data-target="weather" role="menuitem">
+      <span class="nav-icon" aria-hidden="true">🌦️</span>
+      <span class="nav-text">Weather Advisor</span>
+    </button>
+    <button class="nav-item" id="nav-market" data-target="market" role="menuitem">
+      <span class="nav-icon" aria-hidden="true">📈</span>
+      <span class="nav-text">Market Analyst</span>
+    </button>
+    <button class="nav-item" id="nav-fertilizer" data-target="fertilizer" role="menuitem">
+      <span class="nav-icon" aria-hidden="true">🌱</span>
+      <span class="nav-text">Fertilizer Planner</span>
+    </button>
+
+    <span class="nav-section-label">Decision</span>
+    <button class="nav-item" id="nav-decision" data-target="decision" role="menuitem">
+      <span class="nav-icon" aria-hidden="true">🧠</span>
+      <span class="nav-text">Smart Decision</span>
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="version-pill">✦ AgriAI v2.0 Live</div>
+    <p class="footer-note">AI-assisted smart agriculture advice & real-time decision intelligence for Indian farmers.</p>
+  </div>
+</aside>
+
+<!-- ═══════════════════════════════ MOBILE HEADER ═════════════════════════════════ -->
+<header class="mobile-header" role="banner">
+  <span class="mobile-logo">🌾 AgriAI</span>
+  <div class="mobile-header-actions">
+    <button class="voice-assistant-btn-mini" id="btn-open-voice-mob" title="🎙️ Kisan Vaani (NE Voice Assistant)">🎙️</button>
+    <button class="hamburger" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════ MAIN CONTENT ══════════════════════════════════ -->
+<main class="main-content" role="main">
+
+  <!-- Desktop Top Header -->
+  <header class="top-header" aria-label="Page header">
+    <div class="header-left">
+      <span class="header-title" id="header-title-text">🏠 Dashboard</span>
+      <span class="header-sub" id="header-sub-text">Good morning, Farmer! Here's your daily intelligence brief.</span>
+    </div>
+    <div class="header-right">
+      <button class="voice-assistant-top-btn" id="btn-open-voice-top" title="Open Regional Agriculture Voice Assistant (NE, UP & Bihar)">
+        <span class="voice-top-icon">🎙️</span>
+        <span class="voice-top-text">Kisan Vaani (किसान वाणी)</span>
+        <span class="voice-top-badge">NE • UP • Bihar</span>
+      </button>
+      <span class="header-weather-chip" id="header-weather">🌤️ Loading…</span>
+      <span class="header-clock" id="header-clock" aria-live="polite">--:-- --</span>
+    </div>
+  </header>
+
+  <!-- ─────────────────────── DASHBOARD PANEL ─────────────────────── -->
+  <section class="panel active" id="panel-dashboard" aria-label="Dashboard">
+
+    <!-- Farmer Profile Banner -->
+    <div class="profile-banner" id="profile-banner">
+      <div class="profile-avatar" aria-hidden="true">👨‍🌾</div>
+      <div class="profile-info">
+        <div class="profile-greeting" id="profile-greeting">Good evening, Farmer!</div>
+        <div class="profile-name" id="profile-name-display">Set up your farm profile →</div>
+        <div class="profile-meta" id="profile-meta-display">
+          <span class="profile-chip">📍 Location not set</span>
+          <span class="profile-chip">🌾 Crop not set</span>
+          <span class="profile-chip">🌱 Stage not set</span>
+        </div>
+      </div>
+      <button class="profile-edit-btn" id="profile-edit-btn" aria-label="Edit farm profile">✏️ Edit Profile</button>
+    </div>
+
+    <!-- Profile Setup Modal (hidden by default) -->
+    <div id="profile-modal" style="display:none;" class="form-card">
+      <h2 class="form-card-title">👨‍🌾 Set Up Your Farm Profile</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="p-farmer-name">Your Name</label>
+          <input class="form-input" id="p-farmer-name" type="text" placeholder="e.g. Kisan Kumar" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-village">Village / Town</label>
+          <input class="form-input" id="p-village" type="text" placeholder="e.g. Sultanpur" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-district">District</label>
+          <input class="form-input" id="p-district" type="text" placeholder="e.g. Varanasi" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-state">State</label>
+          <select class="form-select" id="p-state">
+            <option value="">-- Select State --</option>
+            <option>Andhra Pradesh</option><option>Assam</option><option>Bihar</option>
+            <option>Chhattisgarh</option><option>Gujarat</option><option>Haryana</option>
+            <option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option>
+            <option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option>
+            <option>Odisha</option><option>Punjab</option><option>Rajasthan</option>
+            <option>Tamil Nadu</option><option>Telangana</option><option>Uttar Pradesh</option>
+            <option>Uttarakhand</option><option>West Bengal</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-crop">Primary Crop</label>
+          <select class="form-select" id="p-crop">
+            <option value="">-- Select Crop --</option>
+            <option value="rice">Rice (Dhan / धान)</option>
+            <option value="wheat">Wheat (Gehun / गेहूँ)</option>
+            <option value="cotton">Cotton (Kapas / कपास)</option>
+            <option value="tomato">Tomato (Tamatar / टमाटर)</option>
+            <option value="maize">Maize (Makka / मक्का)</option>
+            <option value="sugarcane">Sugarcane (Ganna / गन्ना)</option>
+            <option value="soybean">Soybean (Soya)</option>
+            <option value="mustard">Mustard (Sarson / सरसों)</option>
+            <option value="onion">Onion (Pyaaz / प्याज)</option>
+            <option value="chana">Chickpea (Chana / चना)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-stage">Crop Stage</label>
+          <select class="form-select" id="p-stage">
+            <option value="">-- Select Stage --</option>
+            <option value="seedling">Seedling / Germination</option>
+            <option value="vegetative">Vegetative Growth</option>
+            <option value="flowering">Flowering</option>
+            <option value="fruiting">Fruiting / Pod Fill</option>
+            <option value="harvest">Ready for Harvest</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-soil">Soil Type</label>
+          <select class="form-select" id="p-soil">
+            <option value="">-- Select Soil --</option>
+            <option value="loamy">Loamy (Domat)</option>
+            <option value="clay">Clay / Black (Kali Mitti)</option>
+            <option value="sandy">Sandy (Baluwa)</option>
+            <option value="red">Red Laterite</option>
+            <option value="alluvial">Alluvial (Jalod)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-acres">Farm Size (Acres)</label>
+          <input class="form-input" id="p-acres" type="number" min="0.5" step="0.5" placeholder="e.g. 3" />
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" id="profile-save-btn">💾 Save Profile</button>
+    </div>
+
+    <!-- 🌾 End-to-End AI Flow Hero Card -->
+    <div class="flow-hero-banner" id="dashboard-flow-hero">
+      <div class="flow-hero-content">
+        <div class="flow-hero-tag">✨ COMPLETE END-TO-END SMART JOURNEY</div>
+        <h2 class="flow-hero-title">Crop + Location + Plant Photo ➔ Final Smart Decision</h2>
+        <p class="flow-hero-desc">
+          Automated full pipeline: Auto-fetches live micro-climate via <strong>OpenWeatherMap</strong>, live APMC Mandi prices via <strong>Agmarknet</strong>, and analyzes plant symptoms using <strong>OpenAI GPT-4o</strong> for instant, farmer-friendly step-by-step guidance.
+        </p>
+        <div class="flow-hero-actions">
+          <button class="btn btn-primary" id="btn-hero-launch-flow">🌾 Launch End-to-End Flow</button>
+          <button class="btn btn-outline" id="btn-hero-sample-flow">⚡ Run 1-Click Demo</button>
+        </div>
+      </div>
+      <div class="flow-hero-diagram">
+        <div class="f-step-pill">1. 📍 Crop & GPS</div>
+        <span class="f-step-arr">➔</span>
+        <div class="f-step-pill">2. 📸 Plant Photo</div>
+        <span class="f-step-arr">➔</span>
+        <div class="f-step-pill">3. 🌦 Live Weather</div>
+        <span class="f-step-arr">➔</span>
+        <div class="f-step-pill">4. 📊 Mandi Price</div>
+        <span class="f-step-arr">➔</span>
+        <div class="f-step-pill f-highlight">5. 🧠 OpenAI Decision</div>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-card" style="--card-color: #22c55e">
+        <span class="stat-icon">🌿</span>
+        <div class="stat-label">Crop Health Score</div>
+        <div class="stat-value" id="stat-health">--</div>
+        <div class="stat-delta" id="stat-health-delta">Set up profile to begin</div>
+      </div>
+      <div class="stat-card" style="--card-color: #ef4444">
+        <span class="stat-icon">⚠️</span>
+        <div class="stat-label">Active Alerts</div>
+        <div class="stat-value" id="stat-alerts">0</div>
+        <div class="stat-delta">Disease + Weather risks</div>
+      </div>
+      <div class="stat-card" style="--card-color: #f59e0b">
+        <span class="stat-icon">💰</span>
+        <div class="stat-label">Mandi Price (avg)</div>
+        <div class="stat-value" id="stat-price">₹--</div>
+        <div class="stat-delta" id="stat-price-delta">per quintal today</div>
+      </div>
+      <div class="stat-card" style="--card-color: #38bdf8">
+        <span class="stat-icon">🌡️</span>
+        <div class="stat-label">Today's Weather</div>
+        <div class="stat-value" id="stat-temp">--°C</div>
+        <div class="stat-delta" id="stat-weather-desc">Enter weather data</div>
+      </div>
+    </div>
+
+    <!-- Dashboard Grid: Alerts + Market -->
+    <div class="dash-grid">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🔔 Farm Alerts</span>
+          <span class="tag tag-red" id="alert-count-badge">0 Active</span>
+        </div>
+        <div class="alert-feed" id="alert-feed">
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <div class="empty-title">No alerts yet</div>
+            <div class="empty-desc">Use the AI tools to generate farming alerts and recommendations.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">📊 Today's Mandi Prices</span>
+          <span class="tag tag-amber">Live</span>
+        </div>
+        <div class="mini-market" id="mini-market">
+          <div class="mini-market-row"><span class="mm-crop">🌾 Rice</span><span class="mm-price">₹2,180</span><span class="mm-change up">▲ 2.1%</span></div>
+          <div class="mini-market-row"><span class="mm-crop">🌽 Wheat</span><span class="mm-price">₹2,350</span><span class="mm-change up">▲ 0.8%</span></div>
+          <div class="mini-market-row"><span class="mm-crop">🧅 Onion</span><span class="mm-price">₹1,640</span><span class="mm-change down">▼ 3.2%</span></div>
+          <div class="mini-market-row"><span class="mm-crop">🌿 Cotton</span><span class="mm-price">₹6,200</span><span class="mm-change flat">→ Stable</span></div>
+          <div class="mini-market-row"><span class="mm-crop">🫘 Soybean</span><span class="mm-price">₹4,380</span><span class="mm-change up">▲ 1.4%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Tiles -->
+    <h2 class="section-title">⚡ Quick Actions <span class="section-badge">AI Modules</span></h2>
+    <div class="quick-tiles">
+      <button class="quick-tile highlight-tile" data-target="flow" aria-label="Go to End-to-End Advisor">
+        <span class="qt-icon">🌾</span>
+        <span class="qt-label">End-to-End Flow</span>
+      </button>
+      <button class="quick-tile" data-target="disease" aria-label="Go to Disease Detector">
+        <span class="qt-icon">🦠</span>
+        <span class="qt-label">Disease Detector</span>
+      </button>
+      <button class="quick-tile" data-target="weather" aria-label="Go to Weather Advisor">
+        <span class="qt-icon">🌦️</span>
+        <span class="qt-label">Weather Advisor</span>
+      </button>
+      <button class="quick-tile" data-target="market" aria-label="Go to Market Analyst">
+        <span class="qt-icon">📈</span>
+        <span class="qt-label">Market Analyst</span>
+      </button>
+      <button class="quick-tile" data-target="fertilizer" aria-label="Go to Fertilizer Planner">
+        <span class="qt-icon">🌱</span>
+        <span class="qt-label">Fertilizer Planner</span>
+      </button>
+      <button class="quick-tile" data-target="decision" aria-label="Go to Smart Decision Engine">
+        <span class="qt-icon">🧠</span>
+        <span class="qt-label">Smart Decision</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── COMPLETE END-TO-END FLOW PANEL ─────────────────────── -->
+  <section class="panel" id="panel-flow" aria-label="End-to-End AI Flow">
+    <div class="flow-header">
+      <div class="flow-title-row">
+        <div>
+          <h1 class="section-title">🌾 End-to-End Agriculture Assistant <span class="section-badge">Full Pipeline</span></h1>
+          <p class="section-desc">Complete user journey: Crop + Location + Plant Photo ➔ Auto-fetches Live Weather 🌦 + APMC Mandi Rates 📊 ➔ AI Diagnostic Synthesis 🧠 ➔ Final Smart Decision 🎯</p>
+        </div>
+        <div class="flow-actions-top">
+          <button class="btn btn-outline btn-sm" id="btn-flow-quick-demo">⚡ Quick Demo Sample</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stepper Tracker -->
+    <div class="stepper-wrap" aria-label="Journey Progress">
+      <div class="stepper-step active" id="step-node-1">
+        <div class="step-num">1</div>
+        <div class="step-meta">
+          <span class="step-title">Crop & Location</span>
+          <span class="step-sub">GPS / Manual</span>
+        </div>
+      </div>
+      <div class="stepper-line" id="step-line-1"></div>
+      <div class="stepper-step" id="step-node-2">
+        <div class="step-num">2</div>
+        <div class="step-meta">
+          <span class="step-title">Plant Photo</span>
+          <span class="step-sub">Camera / Upload</span>
+        </div>
+      </div>
+      <div class="stepper-line" id="step-line-2"></div>
+      <div class="stepper-step" id="step-node-3">
+        <div class="step-num">3</div>
+        <div class="step-meta">
+          <span class="step-title">Auto-Fetch Data</span>
+          <span class="step-sub">Weather & Mandi</span>
+        </div>
+      </div>
+      <div class="stepper-line" id="step-line-3"></div>
+      <div class="stepper-step" id="step-node-4">
+        <div class="step-num">4</div>
+        <div class="step-meta">
+          <span class="step-title">AI Synthesis</span>
+          <span class="step-sub">Expert Pathology</span>
+        </div>
+      </div>
+      <div class="stepper-line" id="step-line-4"></div>
+      <div class="stepper-step" id="step-node-5">
+        <div class="step-num">5</div>
+        <div class="step-meta">
+          <span class="step-title">Smart Decision</span>
+          <span class="step-sub">Full Report</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Form Card -->
+    <div class="form-card" id="flow-input-card">
+      <h2 class="form-card-title">📍 Step 1: Crop & Farm Location</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="flow-crop">Select Crop <span class="req">*</span></label>
+          <select class="form-select" id="flow-crop" required>
+            <option value="Tomato">🍅 Tomato (टमाटर)</option>
+            <option value="Rice" selected>🌾 Rice / Paddy (धान)</option>
+            <option value="Wheat">🍞 Wheat (गेहूं)</option>
+            <option value="Cotton">☁️ Cotton (कपास)</option>
+            <option value="Sugarcane">🎋 Sugarcane (गन्ना)</option>
+            <option value="Maize">🌽 Maize / Corn (मक्का)</option>
+            <option value="Potato">🥔 Potato (आलू)</option>
+            <option value="Mustard">🌼 Mustard (सरसों)</option>
+            <option value="Soybean">🌱 Soybean (सोयाबीन)</option>
+            <option value="Onion">🧅 Onion (प्याज़)</option>
+            <option value="Chilli">🌶️ Chilli (मिर्च)</option>
+            <option value="Groundnut">🥜 Groundnut (मूंगफली)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="flow-stage">Crop Growth Stage</label>
+          <select class="form-select" id="flow-stage">
+            <option value="Seedling / Germination">🌱 Seedling / Nursery (0-20 days)</option>
+            <option value="Vegetative / Active Growth" selected>🌿 Vegetative Growth (20-50 days)</option>
+            <option value="Tillering / Branching">🌿 Tillering / Branching</option>
+            <option value="Flowering / Booting">🌸 Flowering / Panicle Initiation</option>
+            <option value="Fruit / Grain Filling">🌾 Grain / Pod / Fruit Formation</option>
+            <option value="Maturity / Pre-Harvest">🍂 Ripening / Near Harvest</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="flow-soil">Soil Type</label>
+          <select class="form-select" id="flow-soil">
+            <option value="Alluvial Soil">Alluvial Soil (जलोढ़ मिट्टी) - Gangetic plains</option>
+            <option value="Black Cotton Soil">Black Regur Soil (काली मिट्टी) - Central / West</option>
+            <option value="Red / Laterite Soil">Red / Laterite (लाल मिट्टी) - South / East</option>
+            <option value="Sandy Loam Soil" selected>Sandy Loam (बलुई दोमट मिट्टी)</option>
+            <option value="Clay Loam">Clay Loam (मटियार दोमट)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div class="label-with-action">
+            <label class="form-label" for="flow-state">Location (State & District) <span class="req">*</span></label>
+            <button type="button" class="btn-text-gps" id="btn-flow-gps" title="Auto-detect via device GPS">
+              <span class="gps-icon">📍</span> Auto-Detect GPS
+            </button>
+          </div>
+          <div class="loc-input-group">
+            <select class="form-select" id="flow-state">
+              <option value="Uttar Pradesh" selected>Uttar Pradesh</option>
+              <option value="Punjab">Punjab</option>
+              <option value="Haryana">Haryana</option>
+              <option value="Madhya Pradesh">Madhya Pradesh</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Bihar">Bihar</option>
+              <option value="West Bengal">West Bengal</option>
+              <option value="Andhra Pradesh">Andhra Pradesh</option>
+              <option value="Telangana">Telangana</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="Odisha">Odisha</option>
+              <option value="Assam">Assam</option>
+              <option value="Chhattisgarh">Chhattisgarh</option>
+            </select>
+            <input class="form-input" id="flow-district" type="text" placeholder="District e.g. Varanasi" value="Varanasi" />
+          </div>
+          <div class="gps-status" id="flow-gps-status"></div>
+        </div>
+      </div>
+
+      <!-- Step 2: Plant Image Upload -->
+      <div class="flow-image-section">
+        <div class="section-subtitle-wrap">
+          <h3 class="form-card-title">📸 Step 2: Upload Plant Image or Pick a Sample Leaf</h3>
+          <span class="sub-hint">Clear daylight photos of leaves, stems, or fruits provide the highest AI diagnostic precision</span>
+        </div>
+
+        <div class="upload-container">
+          <!-- Drop Area -->
+          <div class="upload-dropzone" id="flow-dropzone">
+            <input type="file" id="flow-file-input" accept="image/*" capture="environment" class="file-hidden-input" />
+            <div class="drop-content" id="flow-drop-prompt">
+              <div class="drop-icon">📷</div>
+              <div class="drop-title">Tap to take photo or drag & drop image</div>
+              <div class="drop-sub">JPG, PNG, WEBP up to 10MB • Camera capture supported on mobile</div>
+              <div class="drop-actions">
+                <button type="button" class="btn btn-outline btn-sm" id="btn-flow-camera">📸 Capture / Select Image</button>
+              </div>
+            </div>
+            
+            <!-- Live Preview -->
+            <div class="image-preview-box" id="flow-preview-wrap" style="display:none;">
+              <img id="flow-preview-img" src="" alt="Uploaded plant symptom preview" />
+              <div class="scan-laser" id="flow-scan-laser"></div>
+              <div class="scan-badge">Leaf Ready 🟢</div>
+              <button type="button" class="btn-remove-img" id="btn-flow-remove-img" title="Remove image">✕</button>
+            </div>
+          </div>
+
+          <!-- Quick Samples Palette -->
+          <div class="sample-leaves-card">
+            <div class="sample-leaves-title">🌿 Instant Demo: Click to test with sample diseased leaves:</div>
+            <div class="sample-leaves-grid">
+              <button type="button" class="sample-leaf-pill active" data-sample="rice-blast" data-crop="Rice" data-desc="Spindle-shaped brown lesions with grey center on leaf blades and neck node">
+                <span class="sample-leaf-icon">🌾</span>
+                <div class="sample-leaf-info">
+                  <strong>Rice Blast</strong>
+                  <small>Magnaporthe oryzae</small>
+                </div>
+              </button>
+              <button type="button" class="sample-leaf-pill" data-sample="tomato-blight" data-crop="Tomato" data-desc="Concentric target-board brown rings with yellow chlorotic halo on foliage">
+                <span class="sample-leaf-icon">🍅</span>
+                <div class="sample-leaf-info">
+                  <strong>Tomato Early Blight</strong>
+                  <small>Alternaria solani</small>
+                </div>
+              </button>
+              <button type="button" class="sample-leaf-pill" data-sample="cotton-leaf-curl" data-crop="Cotton" data-desc="Upward cupping of leaves, vein thickening and enations beneath leaf veins">
+                <span class="sample-leaf-icon">☁️</span>
+                <div class="sample-leaf-info">
+                  <strong>Cotton Leaf Curl Virus</strong>
+                  <small>Whitefly transmitted</small>
+                </div>
+              </button>
+              <button type="button" class="sample-leaf-pill" data-sample="wheat-rust" data-crop="Wheat" data-desc="Parallel stripes of bright yellow/orange pustules (uredinia) along leaf veins">
+                <span class="sample-leaf-icon">🍞</span>
+                <div class="sample-leaf-info">
+                  <strong>Wheat Yellow/Stripe Rust</strong>
+                  <small>Puccinia striiformis</small>
+                </div>
+              </button>
+            </div>
+
+            <!-- Notes -->
+            <div class="form-group" style="margin-top:1rem;">
+              <label class="form-label" for="flow-notes">Observed Symptoms / Farmer Notes (Optional)</label>
+              <input class="form-input" id="flow-notes" type="text" placeholder="e.g. Started 3 days after sudden rainfall, spreading rapidly on lower leaves" value="Spindle-shaped brown lesions with greyish center appearing on leaves after recent humid weather" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <div class="flow-submit-wrap">
+        <button type="button" class="btn btn-primary btn-lg btn-full pulse-glow" id="btn-flow-execute">
+          <span class="btn-icon">🚀</span> Run End-to-End AI Analysis
+          <span class="btn-subtext">(Auto-fetches Weather 🌦 + Mandi 📊 + OpenAI Vision 🧠)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Pipeline Progress Card (Active during processing) -->
+    <div class="pipeline-card" id="flow-pipeline-card" style="display:none;">
+      <div class="pipeline-header">
+        <div class="pipeline-spinner"></div>
+        <div>
+          <h3 class="pipeline-title">Executing End-to-End Agri Intelligence Pipeline</h3>
+          <p class="pipeline-sub" id="pipeline-status-text">Querying OpenWeatherMap & Agmarknet endpoints...</p>
+        </div>
+      </div>
+      <div class="pipeline-steps">
+        <div class="p-step active" id="ps-1">
+          <div class="ps-icon">📍</div>
+          <div class="ps-details">
+            <span class="ps-label">1. Farm Location & Crop Profile</span>
+            <span class="ps-val" id="ps-val-loc">Configured</span>
+          </div>
+          <div class="ps-status" id="ps-status-loc">✅</div>
+        </div>
+        <div class="p-step" id="ps-2">
+          <div class="ps-icon">📸</div>
+          <div class="ps-details">
+            <span class="ps-label">2. Plant Photo Scan & Symptom Extraction</span>
+            <span class="ps-val" id="ps-val-img">Scanning leaf tissues...</span>
+          </div>
+          <div class="ps-status" id="ps-status-img">⏳</div>
+        </div>
+        <div class="p-step" id="ps-3">
+          <div class="ps-icon">🌦️</div>
+          <div class="ps-details">
+            <span class="ps-label">3. Live Micro-Climate & Weather Analysis</span>
+            <span class="ps-val" id="ps-val-weather">Fetching hyper-local temperature, humidity & rainfall...</span>
+          </div>
+          <div class="ps-status" id="ps-status-weather">⏳</div>
+        </div>
+        <div class="p-step" id="ps-4">
+          <div class="ps-icon">📊</div>
+          <div class="ps-details">
+            <span class="ps-label">4. APMC Mandi Market Price Benchmark</span>
+            <span class="ps-val" id="ps-val-mandi">Checking regional Mandi rates & arrivals...</span>
+          </div>
+          <div class="ps-status" id="ps-status-mandi">⏳</div>
+        </div>
+        <div class="p-step" id="ps-5">
+          <div class="ps-icon">🧠</div>
+          <div class="ps-details">
+            <span class="ps-label">5. Multimodal AI Diagnostic Reasoning</span>
+            <span class="ps-val" id="ps-val-ai">Synthesizing final smart decision...</span>
+          </div>
+          <div class="ps-status" id="ps-status-ai">⏳</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final Smart Decision Result Section -->
+    <div class="flow-result-card" id="flow-result-section" style="display:none;">
+      <!-- Populated dynamically by app.js -->
+    </div>
+  </section>
+
+  <!-- ─────────────────────── DISEASE DETECTOR PANEL ─────────────────────── -->
+  <section class="panel" id="panel-disease" aria-label="Disease Detector">
+    <h1 class="section-title">🦠 Crop Disease Detector <span class="section-badge">AI Powered</span></h1>
+
+    <div class="form-card">
+      <h2 class="form-card-title">🔍 Describe Your Crop Symptoms</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="d-crop">Crop Type</label>
+          <select class="form-select" id="d-crop" required>
+            <option value="">-- Select Crop --</option>
+            <option value="rice">Rice (Dhan / धान)</option>
+            <option value="wheat">Wheat (Gehun / गेहूँ)</option>
+            <option value="cotton">Cotton (Kapas / कपास)</option>
+            <option value="tomato">Tomato (Tamatar / टमाटर)</option>
+            <option value="maize">Maize (Makka / मक्का)</option>
+            <option value="sugarcane">Sugarcane (Ganna / गन्ना)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="d-stage">Crop Stage</label>
+          <select class="form-select" id="d-stage">
+            <option value="seedling">Seedling</option>
+            <option value="vegetative">Vegetative Growth</option>
+            <option value="flowering">Flowering</option>
+            <option value="fruiting">Fruiting / Maturity</option>
+            <option value="harvest">Near Harvest</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="d-symptom-type">Primary Symptom</label>
+          <select class="form-select" id="d-symptom-type">
+            <option value="">-- Select Symptom --</option>
+            <option value="yellow-leaves">Yellow / Pale Leaves (Peelapan)</option>
+            <option value="brown-spots">Brown / Dark Spots on Leaves</option>
+            <option value="white-powder">White Powdery Coating</option>
+            <option value="leaf-curl">Curling / Deformed Leaves</option>
+            <option value="stem-rot">Stem Rotting / Wilting</option>
+            <option value="holes">Holes / Eaten Leaves (Insects)</option>
+            <option value="stunted">Stunted Growth / No Growth</option>
+            <option value="spots-ring">Ring-shaped Spots</option>
+            <option value="red-rust">Orange / Rust colored spots</option>
+            <option value="wet-rot">Wet / Slimy Rot</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="d-affected">Area Affected (%)</label>
+          <select class="form-select" id="d-affected">
+            <option value="5">Less than 5% (Few plants)</option>
+            <option value="15">5–25% (Some plants)</option>
+            <option value="50">25–50% (Half the field)</option>
+            <option value="75">50–75% (Most of field)</option>
+            <option value="90">Over 75% (Severe)</option>
+          </select>
+        </div>
+        <div class="form-group fg-full">
+          <label class="form-label" for="d-description">Describe What You See (Optional)</label>
+          <textarea class="form-textarea" id="d-description" placeholder="Example: Yellow patches on lower leaves, some leaves turning brown at the tips, white fluffy growth underneath leaves, stalk is soft and black near the base…"></textarea>
+          <span class="form-hint">More detail = better diagnosis. Describe colour, location on plant, smell, insect presence etc.</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="d-weather-cond">Recent Weather</label>
+          <select class="form-select" id="d-weather-cond">
+            <option value="humid">Humid / Rainy (>70% humidity)</option>
+            <option value="dry">Dry / Hot (Low rainfall)</option>
+            <option value="cool">Cool and Wet</option>
+            <option value="normal">Normal Season</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="d-spread">Spread Pattern</label>
+          <select class="form-select" id="d-spread">
+            <option value="random">Random plants scattered</option>
+            <option value="patch">Patches / Clusters</option>
+            <option value="edge">Field edges first</option>
+            <option value="all">Entire field evenly</option>
+            <option value="single">Single plant</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" id="disease-analyze-btn" aria-label="Analyze disease symptoms">
+        🔬 Analyze Crop Symptoms
+      </button>
+    </div>
+
+    <!-- Disease Results -->
+    <div class="result-container" id="disease-results" aria-live="polite">
+      <div class="urgency-bar" id="d-urgency-bar">
+        <span class="urgency-icon" id="d-urgency-icon">⚠️</span>
+        <span id="d-urgency-text">Urgency Level: Medium — Act within 3-5 days</span>
+      </div>
+      <h2 class="section-title">📋 Diagnosis Report</h2>
+      <div class="disease-cards" id="disease-cards-container"></div>
+      <div class="tips-box" id="disease-cost-tips">
+        <div class="tips-title">💰 Cost-Saving Advice</div>
+        <ul class="tips-ul" id="disease-tips-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── WEATHER ADVISOR PANEL ─────────────────────── -->
+  <section class="panel" id="panel-weather" aria-label="Weather Advisor">
+    <h1 class="section-title">🌦️ Weather-Based Farming Advisor <span class="section-badge">5-Day Forecast</span></h1>
+
+    <div class="form-card">
+      <h2 class="form-card-title">🌡️ Enter Weather Data for Your Area</h2>
+      <div class="form-grid form-grid-3">
+        <div class="form-group">
+          <label class="form-label" for="w-crop">Crop</label>
+          <select class="form-select" id="w-crop">
+            <option value="rice">Rice</option>
+            <option value="wheat">Wheat</option>
+            <option value="cotton">Cotton</option>
+            <option value="tomato">Tomato</option>
+            <option value="maize">Maize</option>
+            <option value="sugarcane">Sugarcane</option>
+            <option value="soybean">Soybean</option>
+            <option value="mustard">Mustard</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="w-stage">Crop Stage</label>
+          <select class="form-select" id="w-stage">
+            <option value="seedling">Seedling</option>
+            <option value="vegetative">Vegetative</option>
+            <option value="flowering">Flowering</option>
+            <option value="fruiting">Fruiting / Grain Fill</option>
+            <option value="harvest">Near Harvest</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="w-temp">Temperature (°C)</label>
+          <input class="form-input" id="w-temp" type="number" min="-5" max="55" placeholder="e.g. 32" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="w-rain">Rainfall (mm) Last 7 Days</label>
+          <input class="form-input" id="w-rain" type="number" min="0" max="500" placeholder="e.g. 45" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="w-humidity">Humidity (%)</label>
+          <input class="form-input" id="w-humidity" type="number" min="10" max="100" placeholder="e.g. 78" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="w-forecast">Expected Next 5 Days</label>
+          <select class="form-select" id="w-forecast">
+            <option value="rainy">Rainy / Cloudy</option>
+            <option value="sunny">Sunny / Hot</option>
+            <option value="mixed">Mixed (Some rain)</option>
+            <option value="cool">Cool and Dry</option>
+            <option value="very-hot">Extreme Heat (>40°C)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" id="weather-analyze-btn">
+        ⛅ Get Farming Advice for Next 5 Days
+      </button>
+    </div>
+
+    <div class="result-container" id="weather-results" aria-live="polite">
+      <h2 class="section-title">📅 5-Day Forecast & Actions</h2>
+      <div class="weather-forecast-row" id="weather-forecast-row"></div>
+
+      <div class="dash-grid" style="margin-bottom:24px;">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">✅ Recommended Actions</span>
+          </div>
+          <div id="weather-action-list" class="weather-actions"></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">⚠️ Risk Alerts</span>
+          </div>
+          <div class="risk-cards" id="weather-risk-cards"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🕐 Best Timing for Farm Activities</span>
+        </div>
+        <div id="weather-timing-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── MARKET ANALYST PANEL ─────────────────────── -->
+  <section class="panel" id="panel-market" aria-label="Market Analyst">
+    <h1 class="section-title">📈 Market Price Intelligence <span class="section-badge">AI Analyst</span></h1>
+
+    <div class="form-card">
+      <h2 class="form-card-title">🛒 Enter Your Crop & Market Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="m-crop">Crop Type</label>
+          <select class="form-select" id="m-crop">
+            <option value="rice">Rice (Dhan)</option>
+            <option value="wheat">Wheat (Gehun)</option>
+            <option value="cotton">Cotton (Kapas)</option>
+            <option value="tomato">Tomato</option>
+            <option value="maize">Maize (Makka)</option>
+            <option value="sugarcane">Sugarcane</option>
+            <option value="soybean">Soybean</option>
+            <option value="mustard">Mustard (Sarson)</option>
+            <option value="onion">Onion (Pyaaz)</option>
+            <option value="chana">Chickpea (Chana)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="m-state">State / Mandi Region</label>
+          <select class="form-select" id="m-state">
+            <option value="UP">Uttar Pradesh</option>
+            <option value="MP">Madhya Pradesh</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="AP">Andhra Pradesh</option>
+            <option value="Karnataka">Karnataka</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="m-price">Current Price You're Getting (₹/Quintal)</label>
+          <input class="form-input" id="m-price" type="number" min="100" placeholder="e.g. 2100" />
+          <span class="form-hint">Leave blank if unknown</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="m-qty">Quantity Available (Quintals)</label>
+          <input class="form-input" id="m-qty" type="number" min="1" placeholder="e.g. 50" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="m-season">Current Season</label>
+          <select class="form-select" id="m-season">
+            <option value="kharif">Kharif (Jul-Nov)</option>
+            <option value="rabi">Rabi (Nov-Apr)</option>
+            <option value="zaid">Zaid (Apr-Jun)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="m-storage">Storage Available?</label>
+          <select class="form-select" id="m-storage">
+            <option value="yes">Yes — I have storage</option>
+            <option value="no">No — Need to sell immediately</option>
+            <option value="govt">Government warehouse nearby</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" id="market-analyze-btn">
+        📊 Analyze Market & Get Recommendation
+      </button>
+    </div>
+
+    <div class="result-container" id="market-results" aria-live="polite">
+      <div class="rec-box sell" id="market-rec-box">
+        <div class="rec-eyebrow" id="market-rec-eyebrow">Market Recommendation</div>
+        <div class="rec-action-word" id="market-rec-word">SELL NOW</div>
+        <div class="rec-reason" id="market-rec-reason">Loading analysis…</div>
+      </div>
+
+      <div class="price-range" id="market-price-range">
+        <div class="pr-item min"><div class="pr-label">Min Expected</div><div class="pr-value" id="price-min">₹--</div></div>
+        <div class="pr-item expected"><div class="pr-label">Expected Average</div><div class="pr-value" id="price-expected">₹--</div></div>
+        <div class="pr-item max"><div class="pr-label">Peak Potential</div><div class="pr-value" id="price-max">₹--</div></div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📉 Price Trend (12 Months)</span>
+          </div>
+          <div class="chart-box">
+            <div class="chart-label" id="chart-label-txt">Monthly Average Price ₹/Quintal</div>
+            <svg id="price-svg" viewBox="0 0 600 160" preserveAspectRatio="none" aria-label="Price trend chart" role="img"></svg>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🏪 Nearby Mandi Prices (₹/Quintal)</span>
+          </div>
+          <table class="mandi-tbl" aria-label="Mandi prices table">
+            <thead>
+              <tr>
+                <th>Mandi</th>
+                <th>Min</th>
+                <th>Max</th>
+                <th>Modal</th>
+                <th>Trend</th>
+              </tr>
+            </thead>
+            <tbody id="mandi-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tips-box">
+        <div class="tips-title">🏆 Strategy to Maximize Profit</div>
+        <ul class="tips-ul" id="market-strategy-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── FERTILIZER PLANNER PANEL ─────────────────────── -->
+  <section class="panel" id="panel-fertilizer" aria-label="Fertilizer Planner">
+    <h1 class="section-title">🌱 Smart Fertilizer Planner <span class="section-badge">NPK Expert</span></h1>
+
+    <div class="form-card">
+      <h2 class="form-card-title">🧪 Enter Crop & Soil Details</h2>
+      <div class="form-grid form-grid-3">
+        <div class="form-group">
+          <label class="form-label" for="f-crop">Crop</label>
+          <select class="form-select" id="f-crop">
+            <option value="rice">Rice (Dhan)</option>
+            <option value="wheat">Wheat (Gehun)</option>
+            <option value="cotton">Cotton (Kapas)</option>
+            <option value="tomato">Tomato</option>
+            <option value="maize">Maize</option>
+            <option value="sugarcane">Sugarcane</option>
+            <option value="soybean">Soybean</option>
+            <option value="mustard">Mustard</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-soil">Soil Type</label>
+          <select class="form-select" id="f-soil">
+            <option value="loamy">Loamy (Domat)</option>
+            <option value="clay">Clay / Black Cotton</option>
+            <option value="sandy">Sandy (Baluwa)</option>
+            <option value="red">Red Laterite</option>
+            <option value="alluvial">Alluvial (Jalod)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-stage">Growth Stage</label>
+          <select class="form-select" id="f-stage">
+            <option value="seedling">Land Preparation / Seedling</option>
+            <option value="vegetative">Vegetative (Active Growth)</option>
+            <option value="flowering">Flowering / Bud Stage</option>
+            <option value="fruiting">Fruiting / Grain Fill</option>
+            <option value="harvest">Pre-Harvest</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-acres">Farm Area (Acres)</label>
+          <input class="form-input" id="f-acres" type="number" min="0.25" step="0.25" placeholder="e.g. 2" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-prev-crop">Previous Crop (if any)</label>
+          <select class="form-select" id="f-prev-crop">
+            <option value="none">None / First Season</option>
+            <option value="legume">Legume (Dal / Chana)</option>
+            <option value="cereal">Cereal (Rice / Wheat)</option>
+            <option value="vegetable">Vegetable</option>
+            <option value="sugarcane">Sugarcane</option>
+            <option value="cotton">Cotton</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-irrigation">Irrigation Type</label>
+          <select class="form-select" id="f-irrigation">
+            <option value="canal">Canal Irrigation</option>
+            <option value="drip">Drip / Sprinkler</option>
+            <option value="rain">Rainfed only</option>
+            <option value="tube">Tube well / Borewell</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" id="fertilizer-analyze-btn">
+        🧬 Generate Fertilizer Plan
+      </button>
+    </div>
+
+    <div class="result-container" id="fertilizer-results" aria-live="polite">
+      <div class="dash-grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🧪 NPK Requirement</span>
+            <span class="tag tag-blue" id="f-area-badge">Per Acre</span>
+          </div>
+          <div class="npk-chart" id="npk-chart">
+            <div class="npk-row">
+              <span class="npk-lbl"><span class="npk-dot N"></span>Nitrogen (N)</span>
+              <div class="npk-track"><div class="npk-fill N" id="npk-n-fill"></div></div>
+              <span class="npk-val" id="npk-n-val">--</span>
+            </div>
+            <div class="npk-row">
+              <span class="npk-lbl"><span class="npk-dot P"></span>Phosphorus (P)</span>
+              <div class="npk-track"><div class="npk-fill P" id="npk-p-fill"></div></div>
+              <span class="npk-val" id="npk-p-val">--</span>
+            </div>
+            <div class="npk-row">
+              <span class="npk-lbl"><span class="npk-dot K"></span>Potassium (K)</span>
+              <div class="npk-track"><div class="npk-fill K" id="npk-k-fill"></div></div>
+              <span class="npk-val" id="npk-k-val">--</span>
+            </div>
+          </div>
+          <div id="npk-warning" class="urgency-bar" style="display:none;"></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🗓️ Application Schedule</span>
+          </div>
+          <div class="schedule-list" id="schedule-list"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">💊 Recommended Fertilizers</span>
+        </div>
+        <div id="fert-recommendations"></div>
+      </div>
+
+      <div class="tips-box">
+        <div class="tips-title">🌿 Organic Alternatives & Cost-Saving</div>
+        <ul class="tips-ul" id="fert-organic-tips"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── DECISION ENGINE PANEL ─────────────────────── -->
+  <section class="panel" id="panel-decision" aria-label="Smart Decision Engine">
+    <h1 class="section-title">🧠 Smart Farming Decision Engine <span class="section-badge">All-in-One</span></h1>
+
+    <div class="form-card">
+      <h2 class="form-card-title">📋 Complete Farm Situation Assessment</h2>
+      <div class="form-grid form-grid-3">
+        <div class="form-group">
+          <label class="form-label" for="de-crop">Crop</label>
+          <select class="form-select" id="de-crop">
+            <option value="rice">Rice</option>
+            <option value="wheat">Wheat</option>
+            <option value="cotton">Cotton</option>
+            <option value="tomato">Tomato</option>
+            <option value="maize">Maize</option>
+            <option value="sugarcane">Sugarcane</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="de-stage">Crop Stage</label>
+          <select class="form-select" id="de-stage">
+            <option value="seedling">Seedling</option>
+            <option value="vegetative">Vegetative</option>
+            <option value="flowering">Flowering</option>
+            <option value="fruiting">Fruiting / Grain Fill</option>
+            <option value="harvest">Ready to Harvest</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="de-health">Crop Health (visual)</label>
+          <select class="form-select" id="de-health">
+            <option value="excellent">Excellent — No issues</option>
+            <option value="good">Good — Minor issues</option>
+            <option value="average">Average — Some disease/stress</option>
+            <option value="poor">Poor — Severe damage</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="de-temp">Temperature (°C)</label>
+          <input class="form-input" id="de-temp" type="number" placeholder="e.g. 30" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="de-rain">Recent Rainfall (mm)</label>
+          <input class="form-input" id="de-rain" type="number" placeholder="e.g. 60" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="de-humidity">Humidity (%)</label>
+          <input class="form-input" id="de-humidity" type="number" placeholder="e.g. 75" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="de-market">Market Situation</label>
+          <select class="form-select" id="de-market">
+            <option value="high">Prices High — Good time to sell</option>
+            <option value="normal">Prices Normal</option>
+            <option value="low">Prices Low — Consider holding</option>
+            <option value="rising">Prices Rising</option>
+            <option value="falling">Prices Falling</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="de-soil-health">Soil Health</label>
+          <select class="form-select" id="de-soil-health">
+            <option value="good">Good — Fertilized this season</option>
+            <option value="average">Average — Some deficiency</option>
+            <option value="poor">Poor — Needs immediate attention</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="de-budget">Budget Available</label>
+          <select class="form-select" id="de-budget">
+            <option value="high">Good budget (₹5000+)</option>
+            <option value="medium">Medium budget (₹2000-5000)</option>
+            <option value="low">Tight budget (&lt;₹2000)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" id="decision-analyze-btn">
+        🎯 Generate Smart Decision
+      </button>
+    </div>
+
+    <div class="result-container" id="decision-results" aria-live="polite">
+      <!-- Situation Summary -->
+      <h2 class="section-title">📊 Situation Analysis</h2>
+      <div class="situation-summary" id="de-situation-cards"></div>
+
+      <!-- Score -->
+      <div class="card" style="margin-bottom:24px; text-align:center;">
+        <div class="score-circle-wrap">
+          <div class="score-ring">
+            <svg viewBox="0 0 140 140" width="140" height="140">
+              <circle cx="70" cy="70" r="60" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="10"/>
+              <circle id="score-ring-circle" cx="70" cy="70" r="60" fill="none"
+                stroke="url(#scoreGrad)" stroke-width="10"
+                stroke-linecap="round"
+                stroke-dasharray="377" stroke-dashoffset="377"
+                style="transition: stroke-dashoffset 1.5s cubic-bezier(0.4,0,0.2,1)"/>
+              <defs>
+                <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#22c55e"/>
+                  <stop offset="100%" stop-color="#f59e0b"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="score-ring-val" id="de-score-val">--</div>
+          </div>
+          <div class="score-label">Farmer Profit Score</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;" id="de-score-desc">Higher is better (max 100)</div>
+        </div>
+      </div>
+
+      <!-- Risk Highlight -->
+      <div class="card" style="margin-bottom:24px;">
+        <div class="card-header">
+          <span class="card-title">🚨 Biggest Current Risk</span>
+        </div>
+        <div class="risk-cards" id="de-risk-list"></div>
+      </div>
+
+      <!-- Big Action -->
+      <div class="big-action" id="de-big-action">
+        <div class="ba-eyebrow">🎯 Best Immediate Action</div>
+        <div class="ba-headline" id="de-action-headline">Loading recommendation…</div>
+        <div class="ba-steps" id="de-action-steps"></div>
+      </div>
+
+      <!-- Expected Outcome -->
+      <div class="outcome-box">
+        <div class="ob-title">📈 Expected Outcome</div>
+        <div class="ob-text" id="de-outcome"></div>
+      </div>
+    </div>
+  </section>
+
+</main><!-- /.main-content -->
+
+<!-- ═══════════════════════════ MOBILE BOTTOM NAV ═════════════════════════════ -->
+<nav class="mobile-nav" aria-label="Mobile navigation">
+  <div class="mn-inner">
+    <button class="mn-item mn-highlight" data-target="flow" aria-label="End-to-End Advisor">
+      <span class="ni" aria-hidden="true">🌾</span>Flow
+    </button>
+    <button class="mn-item active" data-target="dashboard" aria-label="Dashboard">
+      <span class="ni" aria-hidden="true">🏠</span>Home
+    </button>
+    <button class="mn-item" data-target="disease" aria-label="Disease Detector">
+      <span class="ni" aria-hidden="true">🦠</span>Disease
+    </button>
+    <button class="mn-item" data-target="weather" aria-label="Weather Advisor">
+      <span class="ni" aria-hidden="true">🌦️</span>Weather
+    </button>
+    <button class="mn-item" data-target="market" aria-label="Market Analyst">
+      <span class="ni" aria-hidden="true">📈</span>Market
+    </button>
+    <button class="mn-item" data-target="fertilizer" aria-label="Fertilizer Planner">
+      <span class="ni" aria-hidden="true">🌱</span>Fertilizer
+    </button>
+    <button class="mn-item" data-target="decision" aria-label="Smart Decision">
+      <span class="ni" aria-hidden="true">🧠</span>Decide
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════ FLOATING VOICE ASSISTANT ORB ═══════════════════ -->
+<div class="voice-orb-container" id="voice-orb-container">
+  <div class="voice-orb-pulse"></div>
+  <button class="voice-orb-btn" id="btn-voice-assistant-orb" aria-label="Open North East Agriculture Voice Assistant" title="🎙️ Kisan Vaani — Speak in Assamese, Bodo, Manipuri, Khasi, Mizo, Nepali, Nagamese">
+    <span class="voice-orb-waves">
+      <span class="v-wave-bar"></span>
+      <span class="v-wave-bar"></span>
+      <span class="v-wave-bar"></span>
+    </span>
+    <span class="voice-orb-icon">🎙️</span>
+    <span class="voice-orb-text">किसान वाणी / Voice</span>
+  </button>
+</div>
+
+<!-- ═══════════════════════════ REGIONAL VOICE ASSISTANT MODAL ═══════════════════ -->
+<div class="modal-overlay voice-modal-overlay" id="voice-modal-overlay" style="display:none;" aria-hidden="true">
+  <div class="voice-modal-box" role="dialog" aria-labelledby="voice-modal-title" aria-modal="true">
+    <div class="voice-modal-header">
+      <div class="voice-title-group">
+        <div class="voice-badge">🌾 KISAN VAANI • किसान वाणी (NE • UP • BIHAR)</div>
+        <h2 class="voice-modal-title" id="voice-modal-title">🎙️ Regional Agriculture Voice Assistant</h2>
+        <span class="voice-modal-sub">Speak or listen in your mother tongue: Assamese, Bodo, Manipuri, Khasi, Mizo, Nepali, Nagamese, Bhojpuri, Maithili, Magahi, Awadhi, Hindi & English</span>
+      </div>
+      <button class="modal-close" id="btn-close-voice-modal" aria-label="Close voice assistant">✕</button>
+    </div>
+
+    <!-- Language Selector Bar -->
+    <div class="voice-lang-bar">
+      <span class="voice-lang-label">Choose Language / Dialect (भाषा / बोली चुनें):</span>
+      <div class="voice-lang-chips" id="voice-lang-chips">
+        <!-- North East Languages -->
+        <button type="button" class="lang-chip active" data-lang="as">🌾 অসমীয়া (Assamese)</button>
+        <button type="button" class="lang-chip" data-lang="brx">🌿 बड़ो (Bodo)</button>
+        <button type="button" class="lang-chip" data-lang="mni">🌺 মৈতৈলোন্ (Manipuri)</button>
+        <button type="button" class="lang-chip" data-lang="kha">⛰️ Khasi (Meghalaya)</button>
+        <button type="button" class="lang-chip" data-lang="lus">🌄 Mizo (Mizoram)</button>
+        <button type="button" class="lang-chip" data-lang="ne">🏔️ नेपाली (Nepali/Sikkim)</button>
+        <button type="button" class="lang-chip" data-lang="nag">🍃 Nagamese (Nagaland)</button>
+        <!-- Uttar Pradesh & Bihar Languages -->
+        <button type="button" class="lang-chip" data-lang="bho">🌾 भोजपुरी (Bhojpuri - UP/Bihar)</button>
+        <button type="button" class="lang-chip" data-lang="mai">🌸 मैथिली (Maithili - Bihar)</button>
+        <button type="button" class="lang-chip" data-lang="mag">🪴 मगही (Magahi - Bihar)</button>
+        <button type="button" class="lang-chip" data-lang="awa">🪔 अवधी (Awadhi - UP)</button>
+        <!-- National Standards -->
+        <button type="button" class="lang-chip" data-lang="hi">🇮🇳 हिन्दी (Hindi)</button>
+        <button type="button" class="lang-chip" data-lang="en">🌐 English</button>
+      </div>
+    </div>
+
+    <!-- Audio Visualizer & Mic Control -->
+    <div class="voice-interaction-area">
+      <div class="voice-visualizer-wrap">
+        <div class="voice-visualizer" id="voice-soundwaves">
+          <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+          <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+          <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+        </div>
+        <div class="voice-status-text" id="voice-status-indicator">Tap microphone and speak your farming query...</div>
+      </div>
+
+      <div class="voice-mic-container">
+        <button type="button" class="voice-big-mic-btn" id="btn-toggle-mic" aria-label="Toggle microphone recording">
+          <span class="mic-icon" id="mic-icon-symbol">🎙️</span>
+        </button>
+        <span class="mic-hint" id="mic-hint-text">ক্লিক কৰি কথা কওক (Tap to Speak)</span>
+      </div>
+    </div>
+
+    <!-- Live Transcript Box -->
+    <div class="voice-transcript-box">
+      <div class="voice-box-label">
+        <span>🗣️ Your Spoken Input (আপুনি কোৱা কথা)</span>
+        <button type="button" class="btn-clear-transcript" id="btn-clear-transcript">Clear</button>
+      </div>
+      <div class="voice-transcript-content" id="voice-transcript-text">
+        "ধানৰ পাতত ক'লা দাগ পৰিছে, কি দৰব দিম?"
+      </div>
+    </div>
+
+    <!-- Quick Voice Prompts -->
+    <div class="voice-prompts-section">
+      <span class="voice-prompts-title">💡 Quick Voice Queries (অথবা ইয়াত ক্লিক কৰক):</span>
+      <div class="voice-prompt-pills" id="voice-prompt-pills">
+        <!-- Populated dynamically based on selected language -->
+      </div>
+    </div>
+
+    <!-- AI Spoken Response Box -->
+    <div class="voice-response-card" id="voice-response-card">
+      <div class="voice-resp-header">
+        <div class="voice-ai-meta">
+          <span class="ai-avatar">🤖</span>
+          <div>
+            <strong>AgriAI Voice Response</strong>
+            <span class="resp-lang-tag" id="resp-lang-tag">অসমীয়া (Assamese)</span>
+          </div>
+        </div>
+        <div class="voice-audio-controls">
+          <button type="button" class="btn-audio-control" id="btn-voice-play" title="Play Voice Audio">🔊 শুনক (Listen)</button>
+          <button type="button" class="btn-audio-control" id="btn-voice-stop" title="Stop Audio">⏹ Stop</button>
+          <select id="voice-rate-select" class="voice-rate-select" title="Speech Speed">
+            <option value="0.85">0.85x</option>
+            <option value="1.0" selected>1.0x</option>
+            <option value="1.15">1.15x</option>
+          </select>
+        </div>
+      </div>
+      <div class="voice-response-body" id="voice-response-text">
+        নমস্কাৰ কৃষক বন্ধু! আপোনাৰ ধানৰ পাতৰ দাগ ৰোধ কৰিবলৈ ট্রাইচাইক্লাজল ৭৫% WP প্ৰতি ১৫ লিটাৰ পানীত ১০-১২ গ্ৰাম মিহলাই স্প্ৰে কৰক।
+      </div>
+      <div class="voice-response-phonetic" id="voice-response-phonetic">
+        "Namaskar Krishak Bandhu! Rice blast rodh koriboloi Tricyclazole 75% WP protito 15L panit 10-12g spray korok."
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
