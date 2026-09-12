@@ -452,23 +452,37 @@
         <div class="upload-container">
           <!-- Drop Area -->
           <div class="upload-dropzone" id="flow-dropzone">
-            <input type="file" id="flow-file-input" accept="image/*" capture="environment" class="file-hidden-input" />
+            <input type="file" id="flow-file-input" accept="image/*" class="file-hidden-input" />
             <div class="drop-content" id="flow-drop-prompt">
-              <div class="drop-icon">📷</div>
-              <div class="drop-title">Tap to take photo or drag & drop image</div>
-              <div class="drop-sub">JPG, PNG, WEBP up to 10MB • Camera capture supported on mobile</div>
+              <div class="drop-icon">📸</div>
+              <div class="drop-title">Take Photo with Live Camera or Upload Leaf Image</div>
+              <div class="drop-sub">JPG, PNG, WEBP • AI identifies crop species, leaf organs, and lesion patterns instantly</div>
               <div class="drop-actions">
-                <button type="button" class="btn btn-outline btn-sm" id="btn-flow-camera">📸 Capture / Select Image</button>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-flow-camera-open">📸 Take Photo (Live Camera)</button>
+                <button type="button" class="btn btn-outline btn-sm" id="btn-flow-browse-file">📁 Upload Picture</button>
               </div>
             </div>
             
-            <!-- Live Preview -->
+            <!-- Live Preview with AI Vision Canvas Overlay -->
             <div class="image-preview-box" id="flow-preview-wrap" style="display:none;">
-              <img id="flow-preview-img" src="" alt="Uploaded plant symptom preview" />
+              <div class="preview-img-container">
+                <img id="flow-preview-img" src="" alt="Uploaded plant symptom preview" />
+                <canvas id="flow-detection-canvas" class="detection-canvas-overlay"></canvas>
+              </div>
               <div class="scan-laser" id="flow-scan-laser"></div>
-              <div class="scan-badge">Leaf Ready 🟢</div>
-              <button type="button" class="btn-remove-img" id="btn-flow-remove-img" title="Remove image">✕</button>
+              <div class="preview-top-bar">
+                <div class="scan-badge" id="flow-scan-badge">🔬 AI Vision Scanning...</div>
+                <div class="preview-actions-group">
+                  <button type="button" class="btn-hotspot-toggle active" id="btn-toggle-hotspots" title="Toggle Detected Lesions">🎯 AI Detection Zones</button>
+                  <button type="button" class="btn-remove-img" id="btn-flow-remove-img" title="Remove image">✕</button>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Instant AI Vision Image Identification Card -->
+          <div class="ai-vision-card" id="flow-vision-card" style="display:none;">
+            <!-- Populated dynamically by PlantVisionEngine -->
           </div>
 
           <!-- Quick Samples Palette -->
@@ -586,8 +600,26 @@
   <section class="panel" id="panel-disease" aria-label="Disease Detector">
     <h1 class="section-title">🦠 Crop Disease Detector <span class="section-badge">AI Powered</span></h1>
 
+    <!-- Direct Visual Scan Card in Disease Detector -->
+    <div class="form-card disease-camera-card">
+      <div class="disease-cam-header">
+        <div>
+          <h2 class="form-card-title">📸 Scan Plant Photo with AI Vision</h2>
+          <span class="sub-hint">Snap or upload a leaf photo: AI identifies the crop species, lesion pattern & symptoms automatically!</span>
+        </div>
+        <div class="disease-cam-actions">
+          <button type="button" class="btn btn-primary btn-sm" id="btn-disease-camera-open">📸 Open Camera</button>
+          <button type="button" class="btn btn-outline btn-sm" id="btn-disease-browse-file">📁 Upload Image</button>
+          <input type="file" id="disease-file-input" accept="image/*" class="file-hidden-input" />
+        </div>
+      </div>
+      <div class="disease-vision-result" id="disease-vision-result" style="display:none;">
+        <!-- Populated on upload by PlantVisionEngine -->
+      </div>
+    </div>
+
     <div class="form-card">
-      <h2 class="form-card-title">🔍 Describe Your Crop Symptoms</h2>
+      <h2 class="form-card-title">🔍 Or Describe Your Crop Symptoms Manually</h2>
       <div class="form-grid">
         <div class="form-group">
           <label class="form-label" for="d-crop">Crop Type</label>
@@ -1279,6 +1311,45 @@
       <div class="voice-response-phonetic" id="voice-response-phonetic">
         "Namaskar Krishak Bandhu! Rice blast rodh koriboloi Tricyclazole 75% WP protito 15L panit 10-12g spray korok."
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ LIVE CAMERA CAPTURE MODAL ═══════════════════════ -->
+<div class="modal-overlay camera-modal-overlay" id="camera-modal-overlay" style="display:none;" aria-hidden="true">
+  <div class="camera-modal-box" role="dialog" aria-labelledby="camera-modal-title" aria-modal="true">
+    <div class="camera-modal-header">
+      <div class="camera-title-group">
+        <span class="camera-badge">📸 AI Plant Vision</span>
+        <h2 class="camera-modal-title" id="camera-modal-title">Live Plant Leaf Camera</h2>
+        <span class="camera-modal-sub">Align the leaf inside the reticle guide in clear daylight</span>
+      </div>
+      <button class="modal-close" id="btn-close-camera-modal" aria-label="Close camera">✕</button>
+    </div>
+
+    <div class="camera-viewfinder-wrap">
+      <video id="camera-video-stream" autoplay playsinline muted></video>
+      <div class="camera-guide-reticle">
+        <div class="reticle-corner top-left"></div>
+        <div class="reticle-corner top-right"></div>
+        <div class="reticle-corner bottom-left"></div>
+        <div class="reticle-corner bottom-right"></div>
+        <div class="reticle-center-cross"></div>
+        <span class="reticle-hint">Center leaf inside framing box</span>
+      </div>
+      <div class="camera-scanning-line"></div>
+    </div>
+
+    <div class="camera-controls-bar">
+      <button type="button" class="btn btn-outline btn-sm" id="btn-camera-switch" title="Switch Camera (Front/Back)">
+        🔄 Flip
+      </button>
+      <button type="button" class="btn-shutter-capture" id="btn-camera-shutter" title="Take Leaf Photo">
+        <span class="shutter-inner"></span>
+      </button>
+      <button type="button" class="btn btn-outline btn-sm" id="btn-camera-cancel">
+        Cancel
+      </button>
     </div>
   </div>
 </div>

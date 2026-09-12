@@ -2374,4 +2374,593 @@ body {
   }
 }
 
+/* ══════════════════════════════════════════════════════════════════════════════
+   AI PLANT VISION & COMPUTER VISION PATHOLOGY INSPECTION STYLES
+══════════════════════════════════════════════════════════════════════════════ */
+
+/* Preview Image & Canvas Overlay */
+.preview-img-container {
+  position: relative;
+  width: 100%;
+  max-height: 380px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #020617;
+}
+
+.preview-img-container img {
+  width: 100%;
+  max-height: 380px;
+  object-fit: contain;
+  display: block;
+}
+
+.detection-canvas-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.preview-top-bar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+  pointer-events: auto;
+}
+
+.preview-actions-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-hotspot-toggle {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  color: #34d399;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.btn-hotspot-toggle:hover {
+  background: rgba(52, 211, 153, 0.2);
+  border-color: #34d399;
+}
+
+.btn-hotspot-toggle.active {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.35), rgba(6, 182, 212, 0.3));
+  border-color: #34d399;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.4);
+}
+
+/* Instant AI Vision Inspection Card */
+.ai-vision-card {
+  margin-top: 14px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(11, 26, 44, 0.95));
+  border: 1.5px solid rgba(52, 211, 153, 0.35);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(16, 185, 129, 0.1);
+  animation: vision-slide-in 0.35s ease-out;
+}
+
+@keyframes vision-slide-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.vision-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.vision-plant-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  color: #34d399;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.vision-plant-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 4px 0 2px;
+}
+
+.vision-botanical-name {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.vision-severity-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.vision-severity-pill.critical {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
+}
+
+.vision-severity-pill.moderate {
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #fcd34d;
+}
+
+.vision-severity-pill.low {
+  background: rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  color: #86efac;
+}
+
+/* Cellular Tissue Decomposition Bar */
+.vision-bars-section {
+  margin: 12px 0 16px;
+}
+
+.vision-bars-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.vision-stacked-bar {
+  display: flex;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bar-segment {
+  height: 100%;
+  transition: width 0.6s ease;
+}
+
+.bar-healthy {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.bar-chlorosis {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.bar-necrosis {
+  background: linear-gradient(90deg, #ef4444, #b91c1c);
+}
+
+.vision-legend-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  font-size: 0.74rem;
+  color: #94a3b8;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-healthy { background: #10b981; }
+.dot-chlorosis { background: #f59e0b; }
+.dot-necrosis { background: #ef4444; }
+
+/* Vision Pathology Attributes Grid */
+.vision-attrs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.vision-attr-item {
+  background: rgba(2, 6, 23, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.vision-attr-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.vision-attr-val {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.vision-actions-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btn-apply-vision {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  color: #34d399;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-apply-vision:hover {
+  background: #10b981;
+  color: #ffffff;
+}
+
+/* Disease Detector Panel Camera Card */
+.disease-camera-card {
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.disease-cam-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.disease-cam-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   LIVE CAMERA VIEWFINDER MODAL
+══════════════════════════════════════════════════════════════════════════════ */
+.camera-modal-overlay {
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(10px);
+}
+
+.camera-modal-box {
+  background: #090d16;
+  border: 1.5px solid rgba(52, 211, 153, 0.35);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 580px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+}
+
+.camera-modal-header {
+  padding: 16px 20px 12px;
+  background: rgba(15, 23, 42, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.camera-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #34d399;
+  text-transform: uppercase;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+
+.camera-modal-title {
+  font-size: 1.15rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.camera-modal-sub {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.camera-viewfinder-wrap {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  background: #000000;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#camera-video-stream {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Framing Reticle Guide */
+.camera-guide-reticle {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  pointer-events: none;
+  border: 1px dashed rgba(52, 211, 153, 0.4);
+  border-radius: 14px;
+}
+
+.reticle-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: #34d399;
+  border-style: solid;
+}
+
+.reticle-corner.top-left {
+  top: -2px;
+  left: -2px;
+  border-width: 3px 0 0 3px;
+  border-top-left-radius: 8px;
+}
+
+.reticle-corner.top-right {
+  top: -2px;
+  right: -2px;
+  border-width: 3px 3px 0 0;
+  border-top-right-radius: 8px;
+}
+
+.reticle-corner.bottom-left {
+  bottom: -2px;
+  left: -2px;
+  border-width: 0 0 3px 3px;
+  border-bottom-left-radius: 8px;
+}
+
+.reticle-corner.bottom-right {
+  bottom: -2px;
+  right: -2px;
+  border-width: 0 3px 3px 0;
+  border-bottom-right-radius: 8px;
+}
+
+.reticle-center-cross {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  opacity: 0.6;
+}
+
+.reticle-center-cross::before,
+.reticle-center-cross::after {
+  content: '';
+  position: absolute;
+  background: #34d399;
+}
+
+.reticle-center-cross::before {
+  top: 7px;
+  left: 0;
+  width: 16px;
+  height: 2px;
+}
+
+.reticle-center-cross::after {
+  top: 0;
+  left: 7px;
+  width: 2px;
+  height: 16px;
+}
+
+.reticle-hint {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.72rem;
+  color: #a7f3d0;
+  background: rgba(15, 23, 42, 0.85);
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.camera-scanning-line {
+  position: absolute;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #34d399, #38bdf8, transparent);
+  box-shadow: 0 0 10px #34d399;
+  animation: camera-scan 2.4s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes camera-scan {
+  0% { top: 12%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 88%; opacity: 0; }
+}
+
+/* Shutter & Controls */
+.camera-controls-bar {
+  padding: 16px 24px;
+  background: rgba(15, 23, 42, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-shutter-capture {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
+}
+
+.btn-shutter-capture:hover {
+  transform: scale(1.06);
+  background: rgba(52, 211, 153, 0.3);
+  border-color: #34d399;
+}
+
+.shutter-inner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: transform 0.15s ease;
+}
+
+.btn-shutter-capture:active .shutter-inner {
+  transform: scale(0.88);
+  background: #34d399;
+}
+
+/* Report Visual Pathology Card */
+.report-vision-inspection-box {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.report-vision-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .report-vision-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.report-leaf-thumb-wrap {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px solid rgba(52, 211, 153, 0.3);
+  max-height: 160px;
+  background: #020617;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.report-leaf-thumb-wrap img {
+  width: 100%;
+  max-height: 160px;
+  object-fit: contain;
+}
+
+.report-vision-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.report-vision-header-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.report-vision-crop-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.report-vision-symptoms-line {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+
 
