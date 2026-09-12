@@ -153,16 +153,60 @@
           <label class="form-label" for="p-crop">Primary Crop</label>
           <select class="form-select" id="p-crop">
             <option value="">-- Select Crop --</option>
-            <option value="rice">Rice (Dhan / धान)</option>
-            <option value="wheat">Wheat (Gehun / गेहूँ)</option>
-            <option value="cotton">Cotton (Kapas / कपास)</option>
-            <option value="tomato">Tomato (Tamatar / टमाटर)</option>
-            <option value="maize">Maize (Makka / मक्का)</option>
-            <option value="sugarcane">Sugarcane (Ganna / गन्ना)</option>
-            <option value="soybean">Soybean (Soya)</option>
-            <option value="mustard">Mustard (Sarson / सरसों)</option>
-            <option value="onion">Onion (Pyaaz / प्याज)</option>
-            <option value="chana">Chickpea (Chana / चना)</option>
+            <optgroup label="🌾 Cereals & Millets (अनाज और मोटे अनाज)">
+              <option value="rice">Rice / Paddy (Dhan / धान)</option>
+              <option value="wheat">Wheat (Gehun / गेहूँ)</option>
+              <option value="maize">Maize / Corn (Makka / मक्का)</option>
+              <option value="bajra">Pearl Millet (Bajra / बाजरा)</option>
+              <option value="jowar">Sorghum (Jowar / ज्वार)</option>
+              <option value="ragi">Finger Millet (Ragi / रागी)</option>
+              <option value="barley">Barley (Jau / जौ)</option>
+            </optgroup>
+            <optgroup label="🫘 Pulses & Legumes (दलहन / दालें)">
+              <option value="chana">Chickpea / Gram (Chana / चना)</option>
+              <option value="arhar">Pigeon Pea / Tur (Arhar / अरहर)</option>
+              <option value="moong">Green Gram (Moong / मूंग)</option>
+              <option value="urad">Black Gram (Urad / उड़द)</option>
+              <option value="masoor">Lentil (Masoor / मसूर)</option>
+              <option value="soybean">Soybean (Soya / सोयाबीन)</option>
+              <option value="pea">Field Pea (Matar / मटर)</option>
+            </optgroup>
+            <optgroup label="🌻 Oilseeds (तिलहन)">
+              <option value="mustard">Mustard / Rapeseed (Sarson / सरसों)</option>
+              <option value="groundnut">Groundnut / Peanut (Moongphali / मूंगफली)</option>
+              <option value="sunflower">Sunflower (Surajmukhi / सूरजमुखी)</option>
+              <option value="sesame">Sesame (Til / तिल)</option>
+            </optgroup>
+            <optgroup label="🌿 Commercial & Cash Crops (नकदी फसलें)">
+              <option value="cotton">Cotton (Kapas / कपास)</option>
+              <option value="sugarcane">Sugarcane (Ganna / गन्ना)</option>
+              <option value="jute">Jute (Patson / पटसन)</option>
+              <option value="tea">Tea (Chai / चाय)</option>
+              <option value="coffee">Coffee (कॉफ़ी)</option>
+              <option value="tobacco">Tobacco (Tambaku / तंबाकू)</option>
+            </optgroup>
+            <optgroup label="🥔 Vegetables & Spices (सब्जियां और मसाले)">
+              <option value="potato">Potato (Aloo / आलू)</option>
+              <option value="tomato">Tomato (Tamatar / टमाटर)</option>
+              <option value="onion">Onion (Pyaaz / प्याज)</option>
+              <option value="garlic">Garlic (Lahsun / लहसुन)</option>
+              <option value="chilli">Chilli / Pepper (Mirch / मिर्च)</option>
+              <option value="ginger">Ginger (Adrak / अदरक)</option>
+              <option value="turmeric">Turmeric (Haldi / हल्दी)</option>
+              <option value="brinjal">Brinjal / Eggplant (Baingan / बैंगन)</option>
+              <option value="okra">Okra / Ladyfinger (Bhindi / भिंडी)</option>
+              <option value="cauliflower">Cauliflower (Phool Gobhi / फूलगोभी)</option>
+              <option value="cabbage">Cabbage (Patta Gobhi / पत्तागोभी)</option>
+            </optgroup>
+            <optgroup label="🍎 Fruits & Plantation (फल और बागवानी)">
+              <option value="mango">Mango (Aam / आम)</option>
+              <option value="banana">Banana (Kela / केला)</option>
+              <option value="guava">Guava (Amrood / अमरूद)</option>
+              <option value="pomegranate">Pomegranate (Anar / अनार)</option>
+              <option value="papaya">Papaya (Papita / पपीता)</option>
+              <option value="apple">Apple (Seb / सेब)</option>
+              <option value="citrus">Citrus / Lemon (Nimbu / नींबू)</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group">
@@ -373,18 +417,60 @@
         <div class="form-group">
           <label class="form-label" for="flow-crop">Select Crop <span class="req">*</span></label>
           <select class="form-select" id="flow-crop" required>
-            <option value="Tomato">🍅 Tomato (टमाटर)</option>
-            <option value="Rice" selected>🌾 Rice / Paddy (धान)</option>
-            <option value="Wheat">🍞 Wheat (गेहूं)</option>
-            <option value="Cotton">☁️ Cotton (कपास)</option>
-            <option value="Sugarcane">🎋 Sugarcane (गन्ना)</option>
-            <option value="Maize">🌽 Maize / Corn (मक्का)</option>
-            <option value="Potato">🥔 Potato (आलू)</option>
-            <option value="Mustard">🌼 Mustard (सरसों)</option>
-            <option value="Soybean">🌱 Soybean (सोयाबीन)</option>
-            <option value="Onion">🧅 Onion (प्याज़)</option>
-            <option value="Chilli">🌶️ Chilli (मिर्च)</option>
-            <option value="Groundnut">🥜 Groundnut (मूंगफली)</option>
+            <optgroup label="🌾 Cereals & Millets (अनाज और मोटे अनाज)">
+              <option value="Rice" selected>🌾 Rice / Paddy (धान)</option>
+              <option value="Wheat">🍞 Wheat (गेहूँ)</option>
+              <option value="Maize">🌽 Maize / Corn (मक्का)</option>
+              <option value="Bajra">🌾 Pearl Millet (Bajra / बाजरा)</option>
+              <option value="Jowar">🌾 Sorghum (Jowar / ज्वार)</option>
+              <option value="Ragi">🌾 Finger Millet (Ragi / रागी)</option>
+              <option value="Barley">🌾 Barley (Jau / जौ)</option>
+            </optgroup>
+            <optgroup label="🫘 Pulses & Legumes (दलहन / दालें)">
+              <option value="Chana">🫘 Chickpea / Gram (Chana / चना)</option>
+              <option value="Arhar">🫘 Pigeon Pea / Tur (Arhar / अरहर)</option>
+              <option value="Moong">🫘 Green Gram (Moong / मूंग)</option>
+              <option value="Urad">🫘 Black Gram (Urad / उड़द)</option>
+              <option value="Masoor">🫘 Lentil (Masoor / मसूर)</option>
+              <option value="Soybean">🌱 Soybean (सोयाबीन)</option>
+              <option value="Pea">🫛 Field Pea (Matar / मटर)</option>
+            </optgroup>
+            <optgroup label="🌻 Oilseeds (तिलहन)">
+              <option value="Mustard">🌼 Mustard (Sarson / सरसों)</option>
+              <option value="Groundnut">🥜 Groundnut (Moongphali / मूंगफली)</option>
+              <option value="Sunflower">🌻 Sunflower (सूरजमुखी)</option>
+              <option value="Sesame">🌱 Sesame (Til / तिल)</option>
+            </optgroup>
+            <optgroup label="🌿 Commercial & Cash Crops (नकदी फसलें)">
+              <option value="Cotton">☁️ Cotton (Kapas / कपास)</option>
+              <option value="Sugarcane">🎋 Sugarcane (Ganna / गन्ना)</option>
+              <option value="Jute">🌿 Jute (Patson / पटसन)</option>
+              <option value="Tea">🍵 Tea (Chai / चाय)</option>
+              <option value="Coffee">☕ Coffee (कॉफ़ी)</option>
+              <option value="Tobacco">🍂 Tobacco (तंबाकू)</option>
+            </optgroup>
+            <optgroup label="🥔 Vegetables & Spices (सब्जियां और मसाले)">
+              <option value="Potato">🥔 Potato (Aloo / आलू)</option>
+              <option value="Tomato">🍅 Tomato (Tamatar / टमाटर)</option>
+              <option value="Onion">🧅 Onion (Pyaaz / प्याज)</option>
+              <option value="Garlic">🧄 Garlic (Lahsun / लहसुन)</option>
+              <option value="Chilli">🌶️ Chilli (Mirch / मिर्च)</option>
+              <option value="Ginger">🫚 Ginger (Adrak / अदरक)</option>
+              <option value="Turmeric">🟡 Turmeric (Haldi / हल्दी)</option>
+              <option value="Brinjal">🍆 Brinjal / Eggplant (बैंगन)</option>
+              <option value="Okra">🥬 Okra / Bhindi (भिंडी)</option>
+              <option value="Cauliflower">🥦 Cauliflower (फूलगोभी)</option>
+              <option value="Cabbage">🥬 Cabbage (पत्तागोभी)</option>
+            </optgroup>
+            <optgroup label="🍎 Fruits & Plantation (फल और बागवानी)">
+              <option value="Mango">🥭 Mango (Aam / आम)</option>
+              <option value="Banana">🍌 Banana (Kela / केला)</option>
+              <option value="Guava">🍐 Guava (Amrood / अमरूद)</option>
+              <option value="Pomegranate">🍎 Pomegranate (Anar / अनार)</option>
+              <option value="Papaya">🍈 Papaya (Papita / पपीता)</option>
+              <option value="Apple">🍎 Apple (Seb / सेब)</option>
+              <option value="Citrus">🍋 Citrus / Lemon (नींबू)</option>
+            </optgroup>
           </select>
         </div>
 
@@ -626,12 +712,60 @@
           <label class="form-label" for="d-crop">Crop Type</label>
           <select class="form-select" id="d-crop" required>
             <option value="">-- Select Crop --</option>
-            <option value="rice">Rice (Dhan / धान)</option>
-            <option value="wheat">Wheat (Gehun / गेहूँ)</option>
-            <option value="cotton">Cotton (Kapas / कपास)</option>
-            <option value="tomato">Tomato (Tamatar / टमाटर)</option>
-            <option value="maize">Maize (Makka / मक्का)</option>
-            <option value="sugarcane">Sugarcane (Ganna / गन्ना)</option>
+            <optgroup label="🌾 Cereals & Millets (अनाज और मोटे अनाज)">
+              <option value="rice">Rice / Paddy (Dhan / धान)</option>
+              <option value="wheat">Wheat (Gehun / गेहूँ)</option>
+              <option value="maize">Maize / Corn (Makka / मक्का)</option>
+              <option value="bajra">Pearl Millet (Bajra / बाजरा)</option>
+              <option value="jowar">Sorghum (Jowar / ज्वार)</option>
+              <option value="ragi">Finger Millet (Ragi / रागी)</option>
+              <option value="barley">Barley (Jau / जौ)</option>
+            </optgroup>
+            <optgroup label="🫘 Pulses & Legumes (दलहन / दालें)">
+              <option value="chana">Chickpea / Gram (Chana / चना)</option>
+              <option value="arhar">Pigeon Pea / Tur (Arhar / अरहर)</option>
+              <option value="moong">Green Gram (Moong / मूंग)</option>
+              <option value="urad">Black Gram (Urad / उड़द)</option>
+              <option value="masoor">Lentil (Masoor / मसूर)</option>
+              <option value="soybean">Soybean (Soya / सोयाबीन)</option>
+              <option value="pea">Field Pea (Matar / मटर)</option>
+            </optgroup>
+            <optgroup label="🌻 Oilseeds (तिलहन)">
+              <option value="mustard">Mustard / Rapeseed (Sarson / सरसों)</option>
+              <option value="groundnut">Groundnut / Peanut (Moongphali / मूंगफली)</option>
+              <option value="sunflower">Sunflower (Surajmukhi / सूरजमुखी)</option>
+              <option value="sesame">Sesame (Til / तिल)</option>
+            </optgroup>
+            <optgroup label="🌿 Commercial & Cash Crops (नकदी फसलें)">
+              <option value="cotton">Cotton (Kapas / कपास)</option>
+              <option value="sugarcane">Sugarcane (Ganna / गन्ना)</option>
+              <option value="jute">Jute (Patson / पटसन)</option>
+              <option value="tea">Tea (Chai / चाय)</option>
+              <option value="coffee">Coffee (कॉफ़ी)</option>
+              <option value="tobacco">Tobacco (Tambaku / तंबाकू)</option>
+            </optgroup>
+            <optgroup label="🥔 Vegetables & Spices (सब्जियां और मसाले)">
+              <option value="potato">Potato (Aloo / आलू)</option>
+              <option value="tomato">Tomato (Tamatar / टमाटर)</option>
+              <option value="onion">Onion (Pyaaz / प्याज)</option>
+              <option value="garlic">Garlic (Lahsun / लहसुन)</option>
+              <option value="chilli">Chilli / Pepper (Mirch / मिर्च)</option>
+              <option value="ginger">Ginger (Adrak / अदरक)</option>
+              <option value="turmeric">Turmeric (Haldi / हल्दी)</option>
+              <option value="brinjal">Brinjal / Eggplant (Baingan / बैंगन)</option>
+              <option value="okra">Okra / Ladyfinger (Bhindi / भिंडी)</option>
+              <option value="cauliflower">Cauliflower (Phool Gobhi / फूलगोभी)</option>
+              <option value="cabbage">Cabbage (Patta Gobhi / पत्तागोभी)</option>
+            </optgroup>
+            <optgroup label="🍎 Fruits & Plantation (फल और बागवानी)">
+              <option value="mango">Mango (Aam / आम)</option>
+              <option value="banana">Banana (Kela / केला)</option>
+              <option value="guava">Guava (Amrood / अमरूद)</option>
+              <option value="pomegranate">Pomegranate (Anar / अनार)</option>
+              <option value="papaya">Papaya (Papita / पपीता)</option>
+              <option value="apple">Apple (Seb / सेब)</option>
+              <option value="citrus">Citrus / Lemon (Nimbu / नींबू)</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group">
@@ -725,14 +859,60 @@
         <div class="form-group">
           <label class="form-label" for="w-crop">Crop</label>
           <select class="form-select" id="w-crop">
-            <option value="rice">Rice</option>
-            <option value="wheat">Wheat</option>
-            <option value="cotton">Cotton</option>
-            <option value="tomato">Tomato</option>
-            <option value="maize">Maize</option>
-            <option value="sugarcane">Sugarcane</option>
-            <option value="soybean">Soybean</option>
-            <option value="mustard">Mustard</option>
+            <optgroup label="🌾 Cereals & Millets (अनाज और मोटे अनाज)">
+              <option value="rice">Rice / Paddy (Dhan / धान)</option>
+              <option value="wheat">Wheat (Gehun / गेहूँ)</option>
+              <option value="maize">Maize / Corn (Makka / मक्का)</option>
+              <option value="bajra">Pearl Millet (Bajra / बाजरा)</option>
+              <option value="jowar">Sorghum (Jowar / ज्वार)</option>
+              <option value="ragi">Finger Millet (Ragi / रागी)</option>
+              <option value="barley">Barley (Jau / जौ)</option>
+            </optgroup>
+            <optgroup label="🫘 Pulses & Legumes (दलहन / दालें)">
+              <option value="chana">Chickpea / Gram (Chana / चना)</option>
+              <option value="arhar">Pigeon Pea / Tur (Arhar / अरहर)</option>
+              <option value="moong">Green Gram (Moong / मूंग)</option>
+              <option value="urad">Black Gram (Urad / उड़द)</option>
+              <option value="masoor">Lentil (Masoor / मसूर)</option>
+              <option value="soybean">Soybean (Soya / सोयाबीन)</option>
+              <option value="pea">Field Pea (Matar / मटर)</option>
+            </optgroup>
+            <optgroup label="🌻 Oilseeds (तिलहन)">
+              <option value="mustard">Mustard / Rapeseed (Sarson / सरसों)</option>
+              <option value="groundnut">Groundnut / Peanut (Moongphali / मूंगफली)</option>
+              <option value="sunflower">Sunflower (Surajmukhi / सूरजमुखी)</option>
+              <option value="sesame">Sesame (Til / तिल)</option>
+            </optgroup>
+            <optgroup label="🌿 Commercial & Cash Crops (नकदी फसलें)">
+              <option value="cotton">Cotton (Kapas / कपास)</option>
+              <option value="sugarcane">Sugarcane (Ganna / गन्ना)</option>
+              <option value="jute">Jute (Patson / पटसन)</option>
+              <option value="tea">Tea (Chai / चाय)</option>
+              <option value="coffee">Coffee (कॉफ़ी)</option>
+              <option value="tobacco">Tobacco (Tambaku / तंबाकू)</option>
+            </optgroup>
+            <optgroup label="🥔 Vegetables & Spices (सब्जियां और मसाले)">
+              <option value="potato">Potato (Aloo / आलू)</option>
+              <option value="tomato">Tomato (Tamatar / टमाटर)</option>
+              <option value="onion">Onion (Pyaaz / प्याज)</option>
+              <option value="garlic">Garlic (Lahsun / लहसुन)</option>
+              <option value="chilli">Chilli / Pepper (Mirch / मिर्च)</option>
+              <option value="ginger">Ginger (Adrak / अदरक)</option>
+              <option value="turmeric">Turmeric (Haldi / हल्दी)</option>
+              <option value="brinjal">Brinjal / Eggplant (Baingan / बैंगन)</option>
+              <option value="okra">Okra / Ladyfinger (Bhindi / भिंडी)</option>
+              <option value="cauliflower">Cauliflower (Phool Gobhi / फूलगोभी)</option>
+              <option value="cabbage">Cabbage (Patta Gobhi / पत्तागोभी)</option>
+            </optgroup>
+            <optgroup label="🍎 Fruits & Plantation (फल और बागवानी)">
+              <option value="mango">Mango (Aam / आम)</option>
+              <option value="banana">Banana (Kela / केला)</option>
+              <option value="guava">Guava (Amrood / अमरूद)</option>
+              <option value="pomegranate">Pomegranate (Anar / अनार)</option>
+              <option value="papaya">Papaya (Papita / पपीता)</option>
+              <option value="apple">Apple (Seb / सेब)</option>
+              <option value="citrus">Citrus / Lemon (Nimbu / नींबू)</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group">
@@ -811,16 +991,60 @@
         <div class="form-group">
           <label class="form-label" for="m-crop">Crop Type</label>
           <select class="form-select" id="m-crop">
-            <option value="rice">Rice (Dhan)</option>
-            <option value="wheat">Wheat (Gehun)</option>
-            <option value="cotton">Cotton (Kapas)</option>
-            <option value="tomato">Tomato</option>
-            <option value="maize">Maize (Makka)</option>
-            <option value="sugarcane">Sugarcane</option>
-            <option value="soybean">Soybean</option>
-            <option value="mustard">Mustard (Sarson)</option>
-            <option value="onion">Onion (Pyaaz)</option>
-            <option value="chana">Chickpea (Chana)</option>
+            <optgroup label="🌾 Cereals & Millets (अनाज और मोटे अनाज)">
+              <option value="rice">Rice / Paddy (Dhan / धान)</option>
+              <option value="wheat">Wheat (Gehun / गेहूँ)</option>
+              <option value="maize">Maize / Corn (Makka / मक्का)</option>
+              <option value="bajra">Pearl Millet (Bajra / बाजरा)</option>
+              <option value="jowar">Sorghum (Jowar / ज्वार)</option>
+              <option value="ragi">Finger Millet (Ragi / रागी)</option>
+              <option value="barley">Barley (Jau / जौ)</option>
+            </optgroup>
+            <optgroup label="🫘 Pulses & Legumes (दलहन / दालें)">
+              <option value="chana">Chickpea / Gram (Chana / चना)</option>
+              <option value="arhar">Pigeon Pea / Tur (Arhar / अरहर)</option>
+              <option value="moong">Green Gram (Moong / मूंग)</option>
+              <option value="urad">Black Gram (Urad / उड़द)</option>
+              <option value="masoor">Lentil (Masoor / मसूर)</option>
+              <option value="soybean">Soybean (Soya / सोयाबीन)</option>
+              <option value="pea">Field Pea (Matar / मटर)</option>
+            </optgroup>
+            <optgroup label="🌻 Oilseeds (तिलहन)">
+              <option value="mustard">Mustard / Rapeseed (Sarson / सरसों)</option>
+              <option value="groundnut">Groundnut / Peanut (Moongphali / मूंगफली)</option>
+              <option value="sunflower">Sunflower (Surajmukhi / सूरजमुखी)</option>
+              <option value="sesame">Sesame (Til / तिल)</option>
+            </optgroup>
+            <optgroup label="🌿 Commercial & Cash Crops (नकदी फसलें)">
+              <option value="cotton">Cotton (Kapas / कपास)</option>
+              <option value="sugarcane">Sugarcane (Ganna / गन्ना)</option>
+              <option value="jute">Jute (Patson / पटसन)</option>
+              <option value="tea">Tea (Chai / चाय)</option>
+              <option value="coffee">Coffee (कॉफ़ी)</option>
+              <option value="tobacco">Tobacco (Tambaku / तंबाकू)</option>
+            </optgroup>
+            <optgroup label="🥔 Vegetables & Spices (सब्जियां और मसाले)">
+              <option value="potato">Potato (Aloo / आलू)</option>
+              <option value="tomato">Tomato (Tamatar / टमाटर)</option>
+              <option value="onion">Onion (Pyaaz / प्याज)</option>
+              <option value="garlic">Garlic (Lahsun / लहसुन)</option>
+              <option value="chilli">Chilli / Pepper (Mirch / मिर्च)</option>
+              <option value="ginger">Ginger (Adrak / अदरक)</option>
+              <option value="turmeric">Turmeric (Haldi / हल्दी)</option>
+              <option value="brinjal">Brinjal / Eggplant (Baingan / बैंगन)</option>
+              <option value="okra">Okra / Ladyfinger (Bhindi / भिंडी)</option>
+              <option value="cauliflower">Cauliflower (Phool Gobhi / फूलगोभी)</option>
+              <option value="cabbage">Cabbage (Patta Gobhi / पत्तागोभी)</option>
+            </optgroup>
+            <optgroup label="🍎 Fruits & Plantation (फल और बागवानी)">
+              <option value="mango">Mango (Aam / आम)</option>
+              <option value="banana">Banana (Kela / केला)</option>
+              <option value="guava">Guava (Amrood / अमरूद)</option>
+              <option value="pomegranate">Pomegranate (Anar / अनार)</option>
+              <option value="papaya">Papaya (Papita / पपीता)</option>
+              <option value="apple">Apple (Seb / सेब)</option>
+              <option value="citrus">Citrus / Lemon (Nimbu / नींबू)</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group">
@@ -928,14 +1152,60 @@
         <div class="form-group">
           <label class="form-label" for="f-crop">Crop</label>
           <select class="form-select" id="f-crop">
-            <option value="rice">Rice (Dhan)</option>
-            <option value="wheat">Wheat (Gehun)</option>
-            <option value="cotton">Cotton (Kapas)</option>
-            <option value="tomato">Tomato</option>
-            <option value="maize">Maize</option>
-            <option value="sugarcane">Sugarcane</option>
-            <option value="soybean">Soybean</option>
-            <option value="mustard">Mustard</option>
+            <optgroup label="🌾 Cereals & Millets (अनाज और मोटे अनाज)">
+              <option value="rice">Rice / Paddy (Dhan / धान)</option>
+              <option value="wheat">Wheat (Gehun / गेहूँ)</option>
+              <option value="maize">Maize / Corn (Makka / मक्का)</option>
+              <option value="bajra">Pearl Millet (Bajra / बाजरा)</option>
+              <option value="jowar">Sorghum (Jowar / ज्वार)</option>
+              <option value="ragi">Finger Millet (Ragi / रागी)</option>
+              <option value="barley">Barley (Jau / जौ)</option>
+            </optgroup>
+            <optgroup label="🫘 Pulses & Legumes (दलहन / दालें)">
+              <option value="chana">Chickpea / Gram (Chana / चना)</option>
+              <option value="arhar">Pigeon Pea / Tur (Arhar / अरहर)</option>
+              <option value="moong">Green Gram (Moong / मूंग)</option>
+              <option value="urad">Black Gram (Urad / उड़द)</option>
+              <option value="masoor">Lentil (Masoor / मसूर)</option>
+              <option value="soybean">Soybean (Soya / सोयाबीन)</option>
+              <option value="pea">Field Pea (Matar / मटर)</option>
+            </optgroup>
+            <optgroup label="🌻 Oilseeds (तिलहन)">
+              <option value="mustard">Mustard / Rapeseed (Sarson / सरसों)</option>
+              <option value="groundnut">Groundnut / Peanut (Moongphali / मूंगफली)</option>
+              <option value="sunflower">Sunflower (Surajmukhi / सूरजमुखी)</option>
+              <option value="sesame">Sesame (Til / तिल)</option>
+            </optgroup>
+            <optgroup label="🌿 Commercial & Cash Crops (नकदी फसलें)">
+              <option value="cotton">Cotton (Kapas / कपास)</option>
+              <option value="sugarcane">Sugarcane (Ganna / गन्ना)</option>
+              <option value="jute">Jute (Patson / पटसन)</option>
+              <option value="tea">Tea (Chai / चाय)</option>
+              <option value="coffee">Coffee (कॉफ़ी)</option>
+              <option value="tobacco">Tobacco (Tambaku / तंबाकू)</option>
+            </optgroup>
+            <optgroup label="🥔 Vegetables & Spices (सब्जियां और मसाले)">
+              <option value="potato">Potato (Aloo / आलू)</option>
+              <option value="tomato">Tomato (Tamatar / टमाटर)</option>
+              <option value="onion">Onion (Pyaaz / प्याज)</option>
+              <option value="garlic">Garlic (Lahsun / लहसुन)</option>
+              <option value="chilli">Chilli / Pepper (Mirch / मिर्च)</option>
+              <option value="ginger">Ginger (Adrak / अदरक)</option>
+              <option value="turmeric">Turmeric (Haldi / हल्दी)</option>
+              <option value="brinjal">Brinjal / Eggplant (Baingan / बैंगन)</option>
+              <option value="okra">Okra / Ladyfinger (Bhindi / भिंडी)</option>
+              <option value="cauliflower">Cauliflower (Phool Gobhi / फूलगोभी)</option>
+              <option value="cabbage">Cabbage (Patta Gobhi / पत्तागोभी)</option>
+            </optgroup>
+            <optgroup label="🍎 Fruits & Plantation (फल और बागवानी)">
+              <option value="mango">Mango (Aam / आम)</option>
+              <option value="banana">Banana (Kela / केला)</option>
+              <option value="guava">Guava (Amrood / अमरूद)</option>
+              <option value="pomegranate">Pomegranate (Anar / अनार)</option>
+              <option value="papaya">Papaya (Papita / पपीता)</option>
+              <option value="apple">Apple (Seb / सेब)</option>
+              <option value="citrus">Citrus / Lemon (Nimbu / नींबू)</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group">
@@ -1046,12 +1316,60 @@
         <div class="form-group">
           <label class="form-label" for="de-crop">Crop</label>
           <select class="form-select" id="de-crop">
-            <option value="rice">Rice</option>
-            <option value="wheat">Wheat</option>
-            <option value="cotton">Cotton</option>
-            <option value="tomato">Tomato</option>
-            <option value="maize">Maize</option>
-            <option value="sugarcane">Sugarcane</option>
+            <optgroup label="🌾 Cereals & Millets (अनाज और मोटे अनाज)">
+              <option value="rice">Rice / Paddy (Dhan / धान)</option>
+              <option value="wheat">Wheat (Gehun / गेहूँ)</option>
+              <option value="maize">Maize / Corn (Makka / मक्का)</option>
+              <option value="bajra">Pearl Millet (Bajra / बाजरा)</option>
+              <option value="jowar">Sorghum (Jowar / ज्वार)</option>
+              <option value="ragi">Finger Millet (Ragi / रागी)</option>
+              <option value="barley">Barley (Jau / जौ)</option>
+            </optgroup>
+            <optgroup label="🫘 Pulses & Legumes (दलहन / दालें)">
+              <option value="chana">Chickpea / Gram (Chana / चना)</option>
+              <option value="arhar">Pigeon Pea / Tur (Arhar / अरहर)</option>
+              <option value="moong">Green Gram (Moong / मूंग)</option>
+              <option value="urad">Black Gram (Urad / उड़द)</option>
+              <option value="masoor">Lentil (Masoor / मसूर)</option>
+              <option value="soybean">Soybean (Soya / सोयाबीन)</option>
+              <option value="pea">Field Pea (Matar / मटर)</option>
+            </optgroup>
+            <optgroup label="🌻 Oilseeds (तिलहन)">
+              <option value="mustard">Mustard / Rapeseed (Sarson / सरसों)</option>
+              <option value="groundnut">Groundnut / Peanut (Moongphali / मूंगफली)</option>
+              <option value="sunflower">Sunflower (Surajmukhi / सूरजमुखी)</option>
+              <option value="sesame">Sesame (Til / तिल)</option>
+            </optgroup>
+            <optgroup label="🌿 Commercial & Cash Crops (नकदी फसलें)">
+              <option value="cotton">Cotton (Kapas / कपास)</option>
+              <option value="sugarcane">Sugarcane (Ganna / गन्ना)</option>
+              <option value="jute">Jute (Patson / पटसन)</option>
+              <option value="tea">Tea (Chai / चाय)</option>
+              <option value="coffee">Coffee (कॉफ़ी)</option>
+              <option value="tobacco">Tobacco (Tambaku / तंबाकू)</option>
+            </optgroup>
+            <optgroup label="🥔 Vegetables & Spices (सब्जियां और मसाले)">
+              <option value="potato">Potato (Aloo / आलू)</option>
+              <option value="tomato">Tomato (Tamatar / टमाटर)</option>
+              <option value="onion">Onion (Pyaaz / प्याज)</option>
+              <option value="garlic">Garlic (Lahsun / लहसुन)</option>
+              <option value="chilli">Chilli / Pepper (Mirch / मिर्च)</option>
+              <option value="ginger">Ginger (Adrak / अदरक)</option>
+              <option value="turmeric">Turmeric (Haldi / हल्दी)</option>
+              <option value="brinjal">Brinjal / Eggplant (Baingan / बैंगन)</option>
+              <option value="okra">Okra / Ladyfinger (Bhindi / भिंडी)</option>
+              <option value="cauliflower">Cauliflower (Phool Gobhi / फूलगोभी)</option>
+              <option value="cabbage">Cabbage (Patta Gobhi / पत्तागोभी)</option>
+            </optgroup>
+            <optgroup label="🍎 Fruits & Plantation (फल और बागवानी)">
+              <option value="mango">Mango (Aam / आम)</option>
+              <option value="banana">Banana (Kela / केला)</option>
+              <option value="guava">Guava (Amrood / अमरूद)</option>
+              <option value="pomegranate">Pomegranate (Anar / अनार)</option>
+              <option value="papaya">Papaya (Papita / पपीता)</option>
+              <option value="apple">Apple (Seb / सेब)</option>
+              <option value="citrus">Citrus / Lemon (Nimbu / नींबू)</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group">
