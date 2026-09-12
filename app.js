@@ -1546,11 +1546,32 @@ function getFertilizerData(crop) {
   const found = Object.keys(FERTILIZER_DB).find(k => key.includes(k) || k.includes(key));
   if (found) return FERTILIZER_DB[found];
 
-  const pulses = ['pulse', 'dal', 'gram', 'pea', 'lentil', 'rajma', 'cowpea'];
-  const vegetables = ['cabbage', 'cauliflower', 'cucumber', 'gourd', 'spinach', 'carrot', 'radish'];
-  const fruits = ['guava', 'papaya', 'apple', 'citrus', 'orange', 'pomegranate', 'grapes'];
-  const oilseeds = ['sunflower', 'sesame', 'til', 'castor', 'safflower', 'linseed'];
+  const cereals = ['ragi', 'barley', 'jowar', 'millet', 'oat', 'sorghum', 'finger millet', 'pearl millet'];
+  const pulses = ['pulse', 'dal', 'gram', 'pea', 'lentil', 'masoor', 'rajma', 'cowpea', 'moong', 'urad'];
+  const alliums = ['garlic', 'leek', 'shallot', 'spring onion'];
+  const vegetables = ['cabbage', 'cauliflower', 'cucumber', 'gourd', 'spinach', 'carrot', 'radish', 'capsicum', 'pumpkin'];
+  const fruits = ['guava', 'papaya', 'apple', 'citrus', 'orange', 'pomegranate', 'grapes', 'lychee', 'jackfruit'];
+  const oilseeds = ['sunflower', 'sesame', 'til', 'castor', 'safflower', 'linseed', 'tobacco', 'hemp'];
+  const plantation = ['rubber', 'coconut', 'arecanut', 'cashew', 'cardamom'];
 
+  if (cereals.some(p => key.includes(p))) {
+    return {
+      N: { base: 80, sandy: 100, clay: 65, loamy: 80, red: 90, alluvial: 75 },
+      P: { base: 40, sandy: 50, clay: 32, loamy: 40, red: 45, alluvial: 38 },
+      K: { base: 30, sandy: 45, clay: 22, loamy: 30, red: 38, alluvial: 28 },
+      organic: ['FYM 6-8 tonnes/acre before sowing', 'Azotobacter biofertilizer seed treatment', 'Compost mulching after sowing reduces 20% chemical N need'],
+      govt: 'National Food Security Mission (NFSM) — coarse cereals subsidy & minikit distribution'
+    };
+  }
+  if (alliums.some(p => key.includes(p))) {
+    return {
+      N: { base: 100, sandy: 120, clay: 80, loamy: 100, red: 110, alluvial: 95 },
+      P: { base: 50, sandy: 60, clay: 40, loamy: 50, red: 55, alluvial: 48 },
+      K: { base: 60, sandy: 75, clay: 48, loamy: 60, red: 68, alluvial: 55 },
+      organic: ['FYM 10-12 tonnes/acre', 'Neem cake 200 kg/acre prevents soil-borne pathogens', 'Sulphur 30 kg/acre for quality bulb development'],
+      govt: 'MIDH Horticulture Development Mission — input subsidy for allium crops'
+    };
+  }
   if (pulses.some(p => key.includes(p))) {
     return {
       N: { base: 25, sandy: 30, clay: 20, loamy: 25, red: 28, alluvial: 22 },
@@ -1569,7 +1590,7 @@ function getFertilizerData(crop) {
       govt: 'National Mission on Edible Oils (NMEO) oilseed input subsidy'
     };
   }
-  if (fruits.some(p => key.includes(p))) {
+  if (fruits.some(p => key.includes(p)) || plantation.some(p => key.includes(p))) {
     return {
       N: { base: 120, sandy: 140, clay: 100, loamy: 120, red: 130, alluvial: 110 },
       P: { base: 60, sandy: 75, clay: 50, loamy: 60, red: 65, alluvial: 55 },
@@ -1596,6 +1617,7 @@ function getFertilizerData(crop) {
     govt: 'Soil Health Card scheme — free soil testing & customized advice at your nearest KVK'
   };
 }
+
 
 // ─── Navigation ────────────────────────────────────────────────────────────────
 function initNavigation() {
