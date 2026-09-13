@@ -1684,7 +1684,8 @@ function switchModule(target) {
     weather: ['🌦️ Weather Advisor', 'Weather-based farming recommendations'],
     market: ['📈 Market Analyst', 'Price trends & sell/hold analysis'],
     fertilizer: ['🌱 Fertilizer Planner', 'Customized NPK & organic plans'],
-    decision: ['🧠 Smart Decision Engine', 'All-in-one farming decision support']
+    decision: ['🧠 Smart Decision Engine', 'All-in-one farming decision support'],
+    about: ['ℹ️ About AgriAI', 'Learn about AgriAI, creator Arjit Jaiswal, technology stack & how to use']
   };
   const t = titles[target] || ['AgriAI', ''];
   const titleEl = document.getElementById('header-title-text');
